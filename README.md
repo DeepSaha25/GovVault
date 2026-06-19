@@ -82,7 +82,7 @@ GovVault is designed and built to address all technical requirements for product
 
 1. **Navigate to the GovVault Directory**:
    ```bash
-   cd "level 3\GovVault"
+   cd "GovVault - Deep Saha"
    ```
 
 2. **Configure Environment Variables**:
