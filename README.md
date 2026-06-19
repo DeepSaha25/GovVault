@@ -25,9 +25,8 @@ GovVault addresses these inefficiencies by leveraging Stellar’s ultra-low fees
 
 ## 🚀 Deployed Testnet Specifications
 
-*   **Governor Contract Address**: `CB56DGFX43XUXN2OASKM3SF6I3WWNYUM6KE7HKUKX3JSLZPYQSRQXOHH`
-*   **Treasury Contract Address**: `CBAFHUW7TL73RG4KYSL53ZF4N4NCJK76KXL3NHKEDDWE2GPVHA52LJ47`
-*   **Inter-Contract Link Transaction Hash**: `7fb488cc3a32f6b3e7ff7de9ef652a921d743a129de9d28bc9ef2816ccb21f3a`
+*   **Governor Contract Address**: `CCXFRNY6WTINAQH5RL6BA4QBNQCDYVGCFA62FFKZDH5PU6LZFT4AFOUI`
+*   **Treasury Contract Address**: `CDSS66OI3ISQNO6AMEFJXNF5EWOR3HUDEQCGYFDJXB3Q3KYSZRFDGSFN`
 *   **Stellar Network**: Testnet
 
 ---
