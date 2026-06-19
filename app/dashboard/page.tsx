@@ -222,7 +222,7 @@ export default function DashboardPage() {
         </div>
       ) : proposals.length === 0 ? (
         <div className="text-center py-16 text-zinc-450 border border-zinc-850 rounded-xl bg-zinc-950/20">
-          No proposals found. Create the first one using the "New Proposal" button!
+          No proposals found. Create the first one using the &quot;New Proposal&quot; button!
         </div>
       ) : (
         <div className="grid gap-6">
