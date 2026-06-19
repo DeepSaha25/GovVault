@@ -30,8 +30,8 @@ export default function LandingPage() {
         <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/80 px-4 py-1.5 text-sm text-zinc-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
-              Level 1 & 2 — GovVault Protocol Active
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              GovVault Protocol Core Active
             </div>
 
             <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
@@ -48,7 +48,7 @@ export default function LandingPage() {
                 Enter voting portal <FiArrowRight className="h-4 w-4" />
               </Link>
               <Link href="/transfer" className="rounded-lg border border-zinc-800 bg-zinc-900/40 text-zinc-300 hover:text-white px-6 h-12 inline-flex items-center gap-2 text-sm font-medium transition-colors">
-                Level 1 XLM Transfer
+                Direct XLM Transfer
               </Link>
             </div>
           </div>
@@ -81,23 +81,23 @@ export default function LandingPage() {
           <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-8">
             <h3 className="text-lg font-bold text-white flex items-center gap-2">
               <FiGrid className="h-5 w-5 text-zinc-400" />
-              DAO White & Yellow Belt Complete Setup
+              Core Governance Infrastructure Setup
             </h3>
             <p className="mt-2 text-sm text-zinc-450">
-              Integrate multiple wallets, deploy quadratic governor contracts, and synchronize real-time voting streams.
+              Multi-wallet connections, quadratic on-chain voting metrics, and secure execution flows.
             </p>
             <div className="mt-6 grid gap-4 sm:grid-cols-3 text-center">
               <div className="rounded-lg border border-zinc-850 p-4 bg-zinc-900/20">
-                <div className="text-2xl font-bold text-white">L1</div>
-                <div className="text-xs text-zinc-500 mt-1 font-medium">Freighter & XLM Transfer</div>
+                <div className="text-lg font-bold text-white">Wallet Integration</div>
+                <div className="text-xs text-zinc-550 mt-1 font-medium">Freighter, xBull, and Albedo</div>
               </div>
               <div className="rounded-lg border border-zinc-850 p-4 bg-zinc-900/20">
-                <div className="text-2xl font-bold text-white">L2</div>
-                <div className="text-xs text-zinc-500 mt-1 font-medium">Soroban Governor Contracts</div>
+                <div className="text-lg font-bold text-white">Voting Logic</div>
+                <div className="text-xs text-zinc-550 mt-1 font-medium">On-chain Quadratic Cost Engine</div>
               </div>
               <div className="rounded-lg border border-zinc-850 p-4 bg-zinc-900/20">
-                <div className="text-2xl font-bold text-white">L3</div>
-                <div className="text-xs text-zinc-500 mt-1 font-medium">Quadratic Vote Calculator</div>
+                <div className="text-lg font-bold text-white">Treasury Control</div>
+                <div className="text-xs text-zinc-550 mt-1 font-medium">Timelocked Release Mechanism</div>
               </div>
             </div>
           </div>
