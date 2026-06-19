@@ -2,6 +2,13 @@
 
 GovVault is a decentralized governance and funding platform built on **Stellar Soroban**. It enforces a fair voting mechanism called **Quadratic Voting** to protect decentralized organizations from plutocratic (whale-dominated) outcomes and utilizes a **Timelocked Treasury Executor** to lock and safely release funding allocations on-chain.
 
+## 🔗 Live Submission Links
+
+- **Live Demo**: [gov-vault-deep-saha.vercel.app](https://gov-vault-deep-saha.vercel.app/)
+- **Public GitHub Repository**: [GitHub Repository](https://github.com/DeepSaha25/GovVault)
+
+
+
 ### 🔴 The Problem
 Traditional decentralized autonomous organization (DAO) governance and treasury management face critical vulnerabilities:
 - **Plutocratic Dominance (Whale Control)**: Standard token-weighted voting systems ($1 \text{ token} = 1 \text{ vote}$) allow wealthy "whales" to easily override the majority community's preferences, centralizing power and silencing minority contributors.
