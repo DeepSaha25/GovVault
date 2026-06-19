@@ -87,7 +87,7 @@ fn test_proposal_lifecycle() {
 
     // 3. Fast-forward ledger to end voting
     env.ledger().with_mut(|li| {
-        li.timestamp += 400; // end_time is +300
+        li.timestamp += 90000; // end_time is +86400
     });
 
     // 4. Check result
