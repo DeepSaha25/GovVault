@@ -177,7 +177,7 @@
   "ledger": {
     "protocol_version": 22,
     "sequence_number": 0,
-    "timestamp": 500,
+    "timestamp": 90100,
     "network_id": "0000000000000000000000000000000000000000000000000000000000000000",
     "base_reserve": 0,
     "min_persistent_entry_ttl": 4096,
@@ -438,7 +438,7 @@
                         "symbol": "end_time"
                       },
                       "val": {
-                        "u64": 300
+                        "u64": 86400
                       }
                     },
                     {
@@ -446,7 +446,7 @@
                         "symbol": "execution_time"
                       },
                       "val": {
-                        "u64": 460
+                        "u64": 90060
                       }
                     },
                     {

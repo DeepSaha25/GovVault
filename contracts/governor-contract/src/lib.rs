@@ -74,7 +74,7 @@ impl GovernorContract {
         let mut count: u32 = env.storage().instance().get(&DataKey::ProposalCount).unwrap_or(0);
         count += 1;
 
-        let end_time = env.ledger().timestamp() + 300; // 5 minute voting period for testnet demo
+        let end_time = env.ledger().timestamp() + 86400; // 24 hour voting period for testnet demo
         let proposal = Proposal {
             id: count,
             proposer,
@@ -158,9 +158,10 @@ impl GovernorContract {
             .get(&DataKey::Proposals(proposal_id))
             .expect("Proposal not found");
 
-        if env.ledger().timestamp() < proposal.end_time {
-            panic!("Voting period is still active");
-        }
+        // Allow immediate evaluation for testnet demo convenience
+        // if env.ledger().timestamp() < proposal.end_time {
+        //     panic!("Voting period is still active");
+        // }
 
         if proposal.status != 0 {
             panic!("Proposal result already evaluated");

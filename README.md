@@ -5,9 +5,10 @@ GovVault is a decentralized governance and funding platform built on **Stellar S
 ## 🔗 Live Submission Links
 
 - **Live Demo**: [gov-vault-deep-saha.vercel.app](https://gov-vault-deep-saha.vercel.app/)
+- **Demo Video Walkthrough**: [Google Drive Video](https://drive.google.com/file/d/1blTrlIS3WKc-UUi6_04QatLM3DkCt_H7/view?usp=sharing)
 - **Public GitHub Repository**: [GitHub Repository](https://github.com/DeepSaha25/GovVault)
 
-
+---
 
 ### 🔴 The Problem
 Traditional decentralized autonomous organization (DAO) governance and treasury management face critical vulnerabilities:
@@ -28,6 +29,19 @@ GovVault addresses these inefficiencies by leveraging Stellar’s ultra-low fees
 *   **Governor Contract Address**: `CBDPX5ABBW75O3M2JWD5S66ZUL2VDCTOVNCQFZ4YO4KE4VW5APB3S45Y`
 *   **Treasury Contract Address**: `CB4W5E3X4K4MXJAMZNMTLGYAUE7PM44D73TIEQ64EZQ4UQ3MDGYH2ZJB`
 *   **Stellar Network**: Testnet
+
+---
+
+## 📸 Screenshots & Media
+
+### 1. Desktop UI & Dashboard
+![Dashboard UI](sub%20assets/ui.png)
+
+### 2. Mobile Responsive Design
+![Mobile Responsive UI](sub%20assets/mobui.png)
+
+### 3. CI/CD Build & Test Verification Pipeline
+![CI/CD Pipeline](sub%20assets/cicd.png)
 
 ---
 
@@ -94,9 +108,9 @@ GovVault is designed and built to address all technical requirements for product
 2. **Configure Environment Variables**:
    Create a `.env.local` file in the root with the following configuration:
    ```env
-   NEXT_PUBLIC_GOVERNOR_CONTRACT_ID=CB56DGFX43XUXN2OASKM3SF6I3WWNYUM6KE7HKUKX3JSLZPYQSRQXOHH
-   NEXT_PUBLIC_TREASURY_CONTRACT_ID=CBAFHUW7TL73RG4KYSL53ZF4N4NCJK76KXL3NHKEDDWE2GPVHA52LJ47
-   NEXT_PUBLIC_STELLAR_RPC_URL=https://soroban-rpc.testnet.stellar.org
+   NEXT_PUBLIC_GOVERNOR_CONTRACT_ID=CBDPX5ABBW75O3M2JWD5S66ZUL2VDCTOVNCQFZ4YO4KE4VW5APB3S45Y
+   NEXT_PUBLIC_TREASURY_CONTRACT_ID=CB4W5E3X4K4MXJAMZNMTLGYAUE7PM44D73TIEQ64EZQ4UQ3MDGYH2ZJB
+   NEXT_PUBLIC_STELLAR_RPC_URL=https://soroban-testnet.stellar.org
    ```
 
 3. **Install Dependencies**:
