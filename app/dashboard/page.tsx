@@ -374,7 +374,7 @@ export default function DashboardPage() {
                   <span>{evt.topic.join(' / ')}</span>
                   <span className="text-zinc-550">Ledger: {evt.ledger}</span>
                 </div>
-                <p className="text-zinc-400 truncate">Payload: {JSON.stringify(evt.value)}</p>
+                <p className="text-zinc-400 truncate">Payload: {JSON.stringify(evt.value, (key, value) => typeof value === 'bigint' ? value.toString() : value)}</p>
                 <a
                   href={stellar.getExplorerLink(evt.txHash, 'tx')}
                   target="_blank"
