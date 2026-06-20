@@ -35,3 +35,7 @@ next-env.d.ts
 # rust / soroban
 **/target/
 Cargo.lock
+
+# stitch exports
+stitch_govvault_governance_platform_redesign/
+govvault_stitch_prompt.md
