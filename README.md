@@ -2,13 +2,17 @@
 
 GovVault is a decentralized governance and funding platform built on **Stellar Soroban**. It enforces a fair voting mechanism called **Quadratic Voting** to protect decentralized organizations from plutocratic (whale-dominated) outcomes and utilizes a **Timelocked Treasury Executor** to lock and safely release funding allocations on-chain.
 
-## 🔗 Live Submission Links
+---
 
-- **Live Demo**: [gov-vault-deep-saha.vercel.app](https://gov-vault-deep-saha.vercel.app/)
-- **Demo Video Walkthrough**: [Google Drive Video](https://drive.google.com/file/d/1blTrlIS3WKc-UUi6_04QatLM3DkCt_H7/view?usp=sharing)
-- **Public GitHub Repository**: [GitHub Repository](https://github.com/DeepSaha25/GovVault)
+## 📌 Submission Details & Demo Presentation
+
+*   **🌐 Live Production Link**: [gov-vault-deep-saha.vercel.app](https://gov-vault-deep-saha.vercel.app/)
+*   **📹 Demo Video Presentation**: [Google Drive Video Demo](https://drive.google.com/file/d/1EO8DCjaJwuHDQBBlmg4BG_jB7pvQm1PA/view?usp=sharing)
+*   **💻 GitHub Repository**: [https://github.com/DeepSaha25/GovVault](https://github.com/DeepSaha25/GovVault)
 
 ---
+
+## 📌 Problem & Solution
 
 ### 🔴 The Problem
 Traditional decentralized autonomous organization (DAO) governance and treasury management face critical vulnerabilities:
@@ -24,24 +28,37 @@ GovVault addresses these inefficiencies by leveraging Stellar’s ultra-low fees
 
 ---
 
+## 📸 Media Gallery
+
+### 📱 Mobile Responsive Interface
+Below are screenshots demonstrating the mobile-responsive web interface, built using a clean monochromatic (slate and zinc) layout matching Stitch guidelines:
+
+| Home & Connect Page | Order Dashboard |
+| --- | --- |
+| ![Mobile UI 1](./sub%20assets/mobui1.png) | ![Mobile UI 2](./sub%20assets/mobui2.png) |
+
+---
+
+### ⚙️ CI/CD Pipeline
+Our GitHub Actions workflow automatically builds the Next.js frontend, runs the lint checkers, compiles the Rust contracts to WebAssembly, and runs both cargo and unit tests upon pushing commits to the main repository:
+
+![CI/CD Pipeline Running](./sub%20assets/cicd.png)
+
+---
+
+### 🖥️ Desktop Web UI (Clean Monochromatic Redesign)
+
+| Landing Screen | Main Dashboard Overview |
+| --- | --- |
+| ![Desktop UI 1](./sub%20assets/ui1.png) | ![Desktop UI 2](./sub%20assets/ui2.png) |
+
+---
+
 ## 🚀 Deployed Testnet Specifications
 
 *   **Governor Contract Address**: `CBDPX5ABBW75O3M2JWD5S66ZUL2VDCTOVNCQFZ4YO4KE4VW5APB3S45Y`
 *   **Treasury Contract Address**: `CB4W5E3X4K4MXJAMZNMTLGYAUE7PM44D73TIEQ64EZQ4UQ3MDGYH2ZJB`
 *   **Stellar Network**: Testnet
-
----
-
-## 📸 Screenshots & Media
-
-### 1. Desktop UI & Dashboard
-![Dashboard UI](sub%20assets/ui.png)
-
-### 2. Mobile Responsive Design
-![Mobile Responsive UI](sub%20assets/mobui.png)
-
-### 3. CI/CD Build & Test Verification Pipeline
-![CI/CD Pipeline](sub%20assets/cicd.png)
 
 ---
 
@@ -84,7 +101,7 @@ GovVault is designed and built to address all technical requirements for product
 ---
 
 ## 🛠️ Technology Stack
-- **Frontend**: Next.js 14 (App Router) + TypeScript + Tailwind CSS (Monochromatic zinc dark-mode theme)
+- **Frontend**: Next.js 14 (App Router) + TypeScript + Tailwind CSS (Monochromatic light theme styling matching Stitch parameters)
 - **Contracts**: Rust (Soroban SDK `22.0.11`)
 - **Stellar Integration**: `@stellar/stellar-sdk` & `@creit.tech/stellar-wallets-kit`
 - **Testing**: Vitest + JSDOM for frontend; Cargo test for Rust contracts
@@ -100,9 +117,10 @@ GovVault is designed and built to address all technical requirements for product
 
 ### 🛠️ Step-by-Step Setup
 
-1. **Navigate to the GovVault Directory**:
+1. **Clone the Repository and Navigate to the Directory**:
    ```bash
-   cd "GovVault - Deep Saha"
+   git clone https://github.com/DeepSaha25/GovVault.git
+   cd GovVault
    ```
 
 2. **Configure Environment Variables**:
