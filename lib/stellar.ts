@@ -176,10 +176,11 @@ export class StellarHelper {
 
     const hash = sendResponse.hash;
 
-    // Poll transaction status to wait for ledger finalization (takes ~3-5 seconds)
-    for (let attempt = 0; attempt < 15; attempt++) {
+    // Poll transaction status to wait for ledger finalization (takes ~3-5 seconds, up to 30s under load)
+    for (let attempt = 0; attempt < 30; attempt++) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       const pollResult = await this.pollTransaction(hash);
+      console.log(`Polling transaction ${hash} (attempt ${attempt + 1}): status = ${pollResult.status}`);
       if (pollResult.status === 'SUCCESS') {
         return { hash };
       }
@@ -188,7 +189,7 @@ export class StellarHelper {
       }
     }
 
-    throw new Error('Transaction timed out waiting for ledger finalization.');
+    throw new Error('Transaction timed out waiting for ledger finalization after 30 seconds.');
   }
 
   async simulateRead(params: {
