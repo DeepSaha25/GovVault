@@ -144,10 +144,21 @@ export class StellarHelper {
 
     if (StellarSdk.SorobanRpc.Api.isSimulationError(simulation)) {
       const errMsg = simulation.error || 'Simulation failed';
-      if (errMsg.toLowerCase().includes('balance') || errMsg.toLowerCase().includes('insufficient')) {
-        throw new Error('Insufficient XLM balance for transaction fees.');
+      let friendlyMessage = `Contract simulation failed: ${errMsg}`;
+
+      if (errMsg.includes('UnreachableCodeReached') || errMsg.includes('HostError') || errMsg.toLowerCase().includes('invalid')) {
+        if (params.method === 'vote') {
+          friendlyMessage = 'Voting Failed On-Chain: \n1. Check if you already voted on this proposal.\n2. Ensure your wallet has enough XLM/tokens for the quadratic cost.\n3. Verify that the 24h voting period is still active.';
+        } else if (params.method === 'execute_proposal') {
+          friendlyMessage = 'Execution Failed: The 1-minute timelock period may still be active, or the proposal did not pass.';
+        } else if (params.method === 'create_proposal') {
+          friendlyMessage = 'Failed to create proposal: Please verify your wallet balance and inputs.';
+        }
+      } else if (errMsg.toLowerCase().includes('balance') || errMsg.toLowerCase().includes('insufficient')) {
+        friendlyMessage = 'Insufficient XLM balance for transaction fees.';
       }
-      throw new Error(`Contract simulation failed: ${errMsg}`);
+
+      throw new Error(friendlyMessage);
     }
 
     const preparedTx = StellarSdk.SorobanRpc.assembleTransaction(tx, simulation).build();
