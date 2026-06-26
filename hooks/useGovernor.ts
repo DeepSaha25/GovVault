@@ -22,16 +22,23 @@ export function useGovernor(publicKey: string | undefined) {
       });
       
       const count = countVal ? Number(StellarSdk.scValToNative(countVal)) : 0;
+      const promises = [];
+      for (let i = count; i >= 1; i--) {
+        promises.push(
+          stellar.simulateRead({
+            publicKey,
+            contractId: GOVERNOR_CONTRACT_ID,
+            method: 'get_proposal',
+            args: [StellarSdk.nativeToScVal(i, { type: 'u32' })],
+          })
+        );
+      }
+
+      const results = await Promise.all(promises);
       const loaded: Proposal[] = [];
 
-      for (let i = count; i >= 1; i--) {
-        const propVal = await stellar.simulateRead({
-          publicKey,
-          contractId: GOVERNOR_CONTRACT_ID,
-          method: 'get_proposal',
-          args: [StellarSdk.nativeToScVal(i, { type: 'u32' })],
-        });
-
+      for (let idx = 0; idx < results.length; idx++) {
+        const propVal = results[idx];
         if (propVal) {
           const raw = StellarSdk.scValToNative(propVal);
           loaded.push({
