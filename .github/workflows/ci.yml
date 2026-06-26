@@ -61,7 +61,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Node Dependencies
-        run: npm ci --ignore-scripts
+        run: npm ci --legacy-peer-deps --ignore-scripts
 
       - name: Run Vitest Tests
         run: npm run test
