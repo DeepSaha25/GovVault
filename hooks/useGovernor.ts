@@ -24,7 +24,7 @@ export function useGovernor(publicKey: string | undefined) {
       const count = countVal ? Number(StellarSdk.scValToNative(countVal)) : 0;
       const loaded: Proposal[] = [];
 
-      for (let i = 1; i <= count; i++) {
+      for (let i = count; i >= 1; i--) {
         const propVal = await stellar.simulateRead({
           publicKey,
           contractId: GOVERNOR_CONTRACT_ID,
