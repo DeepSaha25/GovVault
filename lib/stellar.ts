@@ -224,20 +224,22 @@ export class StellarHelper {
   async pollTransaction(hash: string): Promise<{ status: 'PENDING' | 'SUCCESS' | 'FAILED'; returnValue?: string }> {
     try {
       const response = await this.rpcServer.getTransaction(hash);
+      console.log(`getTransaction status for ${hash}: ${response.status}`);
 
-      if (response.status === StellarSdk.SorobanRpc.Api.GetTransactionStatus.NOT_FOUND) {
-        return { status: 'PENDING' };
+      if (response.status === 'SUCCESS') {
+        return {
+          status: 'SUCCESS',
+          returnValue: response.returnValue
+            ? String(StellarSdk.scValToNative(response.returnValue))
+            : undefined,
+        };
       }
-      if (response.status === StellarSdk.SorobanRpc.Api.GetTransactionStatus.FAILED) {
+      if (response.status === 'FAILED') {
         return { status: 'FAILED' };
       }
-      return {
-        status: 'SUCCESS',
-        returnValue: response.returnValue
-          ? String(StellarSdk.scValToNative(response.returnValue))
-          : undefined,
-      };
-    } catch {
+      return { status: 'PENDING' };
+    } catch (error) {
+      console.error('Error during pollTransaction:', error);
       return { status: 'PENDING' };
     }
   }
