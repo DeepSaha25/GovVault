@@ -59,36 +59,36 @@ body {
 
 @layer components {
   .field-input {
-    @apply h-11 w-full rounded border border-slate-200 bg-white
-           px-3 text-sm text-[#1b1b1d] placeholder:text-slate-400
-           focus:border-black focus:outline-none focus:ring-0
+    @apply h-11 w-full rounded border border-slate-200 dark:border-surface-700 bg-white dark:bg-surface-800
+           px-3 text-sm text-[#1b1b1d] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500
+           focus:border-black dark:focus:border-white focus:outline-none focus:ring-0
            transition-all duration-200;
   }
 
   .btn-primary {
     @apply inline-flex h-11 items-center justify-center gap-2 rounded
-           bg-black px-5 text-sm font-semibold text-white
+           bg-black dark:bg-white px-5 text-sm font-semibold text-white dark:text-black
            hover:bg-opacity-90 disabled:cursor-not-allowed disabled:opacity-60
            transition-all active:scale-[0.98];
   }
 
   .btn-secondary {
     @apply inline-flex h-11 items-center justify-center gap-2 rounded
-           border border-slate-200 bg-white px-5 text-sm font-medium
-           text-slate-700 hover:border-slate-400 hover:text-black
+           border border-slate-200 dark:border-surface-700 bg-white dark:bg-surface-800 px-5 text-sm font-medium
+           text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-black dark:hover:text-white
            disabled:cursor-not-allowed disabled:opacity-60 transition-all;
   }
 
   .btn-danger {
     @apply inline-flex h-11 items-center justify-center gap-2 rounded
-           bg-red-50/10 border border-red-500/20 px-5 text-sm font-medium
-           text-red-700 hover:bg-red-500/20 hover:text-red-800
+           bg-red-50/10 dark:bg-red-900/10 border border-red-500/20 px-5 text-sm font-medium
+           text-red-700 dark:text-red-400 hover:bg-red-500/20 hover:text-red-800 dark:hover:text-red-300
            disabled:cursor-not-allowed disabled:opacity-60 transition-all;
   }
 
   .card {
-    @apply rounded border border-slate-200 bg-white p-6
-           transition-all hover:border-slate-800;
+    @apply rounded border border-slate-200 dark:border-surface-700 bg-white dark:bg-surface-800 p-6
+           transition-all hover:border-slate-800 dark:hover:border-slate-400;
   }
 
   .card-interactive {
@@ -96,11 +96,11 @@ body {
   }
 
   .glass {
-    @apply bg-white/80 backdrop-blur-lg border border-slate-200/50;
+    @apply bg-white/80 dark:bg-surface-900/80 backdrop-blur-lg border border-slate-200/50 dark:border-surface-700/50;
   }
 
   .gradient-text {
-    @apply bg-black bg-clip-text text-transparent font-bold;
+    @apply bg-black dark:bg-white bg-clip-text text-transparent font-bold;
   }
 
   .status-badge {
@@ -109,6 +109,6 @@ body {
   }
 
   .skeleton-pulse {
-    @apply animate-pulse bg-slate-200;
+    @apply animate-pulse bg-slate-200 dark:bg-surface-700;
   }
 }

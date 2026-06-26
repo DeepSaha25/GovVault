@@ -27,8 +27,8 @@ export default function WalletButton() {
     return (
       <div className="flex flex-wrap items-center gap-2">
         {/* Balance display */}
-        <div className="inline-flex h-10 items-center gap-2 rounded border border-slate-200 bg-white px-3 text-xs font-semibold text-slate-700">
-          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+        <div className="inline-flex h-10 items-center gap-2 rounded border border-slate-200 dark:border-surface-700 bg-white dark:bg-surface-800 px-3 text-xs font-semibold text-slate-700 dark:text-slate-200">
+          <span className="h-2 w-2 rounded-full bg-emerald-50 dark:bg-emerald-900/300 animate-pulse" />
           {balance} XLM
         </div>
 
@@ -74,7 +74,7 @@ export default function WalletButton() {
       </button>
 
       {dropdownOpen && !loading && (
-        <div className="absolute right-0 top-12 z-50 w-60 rounded border border-slate-200 bg-white p-2 shadow-xl animate-slide-up">
+        <div className="absolute right-0 top-12 z-50 w-60 rounded border border-slate-200 dark:border-surface-700 bg-white dark:bg-surface-800 p-2 shadow-xl animate-slide-up">
           {walletOptions.map((wallet) => (
             <button
               key={wallet.id}
@@ -82,11 +82,11 @@ export default function WalletButton() {
                 setDropdownOpen(false);
                 connect(wallet.id);
               }}
-              className="flex w-full items-center gap-3 rounded px-3 py-2.5 text-left text-sm transition-colors hover:bg-slate-50"
+              className="flex w-full items-center gap-3 rounded px-3 py-2.5 text-left text-sm transition-colors hover:bg-slate-50 dark:bg-surface-800"
             >
               <div>
-                <p className="font-semibold text-black">{wallet.label}</p>
-                <p className="text-xs text-slate-500">{wallet.note}</p>
+                <p className="font-semibold text-black dark:text-white">{wallet.label}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">{wallet.note}</p>
               </div>
             </button>
           ))}

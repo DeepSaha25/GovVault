@@ -6,6 +6,8 @@ import Footer from '@/components/layout/Footer';
 import { Toaster } from 'react-hot-toast';
 import { Analytics } from '@vercel/analytics/react';
 
+import { ThemeProvider } from '@/components/theme/ThemeProvider';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -19,11 +21,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} flex min-h-screen flex-col bg-[#fcf8fa] text-[#1b1b1d]`}>
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} flex min-h-screen flex-col bg-[#fcf8fa] dark:bg-surface-900 text-[#1b1b1d] dark:text-white transition-colors duration-200`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
         <Toaster
           position="bottom-right"
           toastOptions={{
@@ -35,6 +38,7 @@ export default function RootLayout({
           }}
         />
         <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );
