@@ -23,28 +23,37 @@ export default function LandingPage() {
   return (
     <div className="animate-fade-in bg-[#fcf8fa] dark:bg-surface-900">
       {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-slate-200 dark:border-surface-700 bg-white dark:bg-surface-800">
-        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
-          <div className="mx-auto max-w-3xl text-center space-y-6">
-            <div className="mb-6 inline-flex items-center gap-2 rounded border border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-800 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/300 animate-pulse" />
+      <section className="relative overflow-hidden border-b border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-900">
+        {/* Background decorative gradients */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -left-40 w-96 h-96 bg-purple-400/20 dark:bg-purple-900/20 rounded-full blur-3xl opacity-50 mix-blend-multiply dark:mix-blend-lighten animate-pulse" />
+          <div className="absolute top-20 right-0 w-80 h-80 bg-emerald-400/20 dark:bg-emerald-900/20 rounded-full blur-3xl opacity-50 mix-blend-multiply dark:mix-blend-lighten" />
+          <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[40rem] h-[40rem] bg-blue-400/10 dark:bg-blue-900/10 rounded-full blur-3xl opacity-50 mix-blend-multiply dark:mix-blend-lighten" />
+        </div>
+
+        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-36">
+          <div className="mx-auto max-w-3xl text-center space-y-8">
+            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-surface-700 bg-white/50 dark:bg-surface-800/50 backdrop-blur-sm px-5 py-2 text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200 shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
               GovVault Protocol Core Active
             </div>
 
-            <h1 className="text-4xl font-bold tracking-tight text-black dark:text-white sm:text-5xl lg:text-6xl font-sans">
+            <h1 className="text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl font-sans drop-shadow-sm">
               Democratic Governance with{' '}
-              <span className="underline decoration-slate-300 underline-offset-4">Quadratic Voting</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">
+                Quadratic Voting
+              </span>
             </h1>
 
-            <p className="mt-6 text-base leading-8 text-slate-500 dark:text-slate-400 sm:text-lg max-w-2xl mx-auto">
+            <p className="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-300 sm:text-xl max-w-2xl mx-auto font-medium">
               Empower DAO members to propose, vote quadratically on funding allocations, and execute decentralized treasury grants trustlessly.
             </p>
 
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <Link href="/dashboard" className="btn-primary h-12 px-6 flex items-center justify-center gap-2 uppercase tracking-wider text-xs">
+            <div className="mt-12 flex flex-wrap justify-center gap-4">
+              <Link href="/dashboard" className="btn-primary h-14 px-8 flex items-center justify-center gap-2 uppercase tracking-wider text-sm shadow-xl shadow-black/10 dark:shadow-white/5 hover:-translate-y-0.5 transition-transform">
                 Enter voting portal <FiArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/transfer" className="btn-secondary h-12 px-6 flex items-center justify-center gap-2 uppercase tracking-wider text-xs">
+              <Link href="/transfer" className="btn-secondary h-14 px-8 flex items-center justify-center gap-2 uppercase tracking-wider text-sm hover:-translate-y-0.5 transition-transform bg-white/80 dark:bg-surface-800/80 backdrop-blur-md">
                 Direct XLM Transfer
               </Link>
             </div>
