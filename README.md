@@ -77,7 +77,9 @@ Our GitHub Actions workflow automatically builds the Next.js frontend, runs the 
 
 ![CI/CD Pipeline Running](./sub%20assets/cicd.png)
 
----
+### 📈 Analytics Dashboard
+![Vercel Web Analytics Dashboard](./sub%20assets/analytics.png)
+
 ---
 
 ## 🗣️ User Feedback Implementations
