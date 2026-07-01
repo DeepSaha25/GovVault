@@ -3,6 +3,20 @@
 GovVault is a decentralized governance and funding platform built on **Stellar Soroban**. It enforces a fair voting mechanism called **Quadratic Voting** to protect decentralized organizations from plutocratic (whale-dominated) outcomes and utilizes a **Timelocked Treasury Executor** to lock and safely release funding allocations on-chain.
 
 ---
+## 📌 Problem & Solution
+
+### 🔴 The Problem
+Traditional decentralized autonomous organization (DAO) governance and treasury management face critical vulnerabilities:
+- **Plutocratic Dominance (Whale Control)**: Standard token-weighted voting systems ($1 \text{ token} = 1 \text{ vote}$) allow wealthy "whales" to easily override the majority community's preferences, centralizing power and silencing minority contributors.
+- **Treasury Vulnerability (Hostile Takeovers)**: Many governance systems execute funding payouts immediately upon proposal completion. This makes DAOs vulnerable to sudden governance takeovers, exploit proposals, or malicious drainages before the community can react.
+- **High Fees for Decentralized Action**: Executing complex governance rules and multiple token voting options on L1 blockchains can cost users massive gas fees, discouraging participation.
+
+### 🟢 The Solution
+GovVault addresses these inefficiencies by leveraging Stellar’s ultra-low fees and Soroban’s smart contract interoperability:
+- **On-Chain Quadratic Voting**: Governs with a cost scale of $cost = \text{votes}^2$ (e.g., 1 vote costs 1 token, 5 votes cost 25 tokens). This curbs whale dominance by making concentrated votes exponentially expensive, balancing power towards broad community consensus.
+- **Timelocked Treasury Executor (ICC)**: Implements split-contract security. Upon proposal approval, the Governor contract calls the Treasury contract via Inter-Contract Communication (ICC) to timelock the funds. This delay provides a critical security buffer for the community to inspect, veto, or freeze the allocation if a malicious takeover is detected.
+- **Frictionless Governance**: Capitalizes on Stellar’s speed and near-zero transaction fees to enable active, low-cost community-driven decision-making and micro-grant funding at scale.
+
 
 ## 📌 Submission Details & Demo Presentation
 
@@ -64,20 +78,19 @@ Our GitHub Actions workflow automatically builds the Next.js frontend, runs the 
 ![CI/CD Pipeline Running](./sub%20assets/cicd.png)
 
 ---
+---
 
-## 📌 Problem & Solution
+## 🗣️ User Feedback Implementations
 
-### 🔴 The Problem
-Traditional decentralized autonomous organization (DAO) governance and treasury management face critical vulnerabilities:
-- **Plutocratic Dominance (Whale Control)**: Standard token-weighted voting systems ($1 \text{ token} = 1 \text{ vote}$) allow wealthy "whales" to easily override the majority community's preferences, centralizing power and silencing minority contributors.
-- **Treasury Vulnerability (Hostile Takeovers)**: Many governance systems execute funding payouts immediately upon proposal completion. This makes DAOs vulnerable to sudden governance takeovers, exploit proposals, or malicious drainages before the community can react.
-- **High Fees for Decentralized Action**: Executing complex governance rules and multiple token voting options on L1 blockchains can cost users massive gas fees, discouraging participation.
+Based on the community feedback collected in June 2026, the following improvements have been successfully implemented:
 
-### 🟢 The Solution
-GovVault addresses these inefficiencies by leveraging Stellar’s ultra-low fees and Soroban’s smart contract interoperability:
-- **On-Chain Quadratic Voting**: Governs with a cost scale of $cost = \text{votes}^2$ (e.g., 1 vote costs 1 token, 5 votes cost 25 tokens). This curbs whale dominance by making concentrated votes exponentially expensive, balancing power towards broad community consensus.
-- **Timelocked Treasury Executor (ICC)**: Implements split-contract security. Upon proposal approval, the Governor contract calls the Treasury contract via Inter-Contract Communication (ICC) to timelock the funds. This delay provides a critical security buffer for the community to inspect, veto, or freeze the allocation if a malicious takeover is detected.
-- **Frictionless Governance**: Capitalizes on Stellar’s speed and near-zero transaction fees to enable active, low-cost community-driven decision-making and micro-grant funding at scale.
+| Feedback Request | Implementation / Commit |
+| :--- | :--- |
+| **"Provide a simple visual slider or input calculator on the voting panel that shows exactly how many tokens will be consumed for votes before committing to the transaction (e.g. showing that 4 votes will cost 16 tokens)."** | Replaced numeric input with an interactive range slider for immediate visual feedback on quadratic cost.<br/>`feat: Add visual slider for quadratic voting cost calculation` |
+| **"add some guide to the user it would be able to make UX easy and subtle"** | Added a dismissible welcome guide/info banner on the dashboard explaining the quadratic voting rules.<br/>`feat: Add user guide explaining quadratic voting rules` |
+| **"you improve the landing page"** | Enhanced the hero section with dynamic gradient blobs, modern typography, and better shadow highlights.<br/>`style: Improve landing page UI and hero section` |
+| **"ui is genuinely good, if there dark mode section it would be more good."** / **"the dark mode is awesome make it default"** | Exposed the ThemeToggle and changed the default application theme to dark mode.<br/>`feat: Set dark mode as default theme` |
+| **"Adding a sample proposal will help users understand the workflow imo"** | Injected a mock/sample proposal that renders when the on-chain list is empty to let new users preview the voting UI safely.<br/>`feat: Add sample proposal to help users understand the workflow` |
 
 ---
 
@@ -168,19 +181,7 @@ GovVault is designed and built to address all technical requirements for product
        cd contracts/governor-contract && cargo test
        ```
 
----
 
-## 🗣️ User Feedback Implementations
-
-Based on the community feedback collected in June 2026, the following improvements have been successfully implemented:
-
-| Feedback Request | Implementation / Commit |
-| :--- | :--- |
-| **"Provide a simple visual slider or input calculator on the voting panel that shows exactly how many tokens will be consumed for votes before committing to the transaction (e.g. showing that 4 votes will cost 16 tokens)."** | Replaced numeric input with an interactive range slider for immediate visual feedback on quadratic cost.<br/>`feat: Add visual slider for quadratic voting cost calculation` |
-| **"add some guide to the user it would be able to make UX easy and subtle"** | Added a dismissible welcome guide/info banner on the dashboard explaining the quadratic voting rules.<br/>`feat: Add user guide explaining quadratic voting rules` |
-| **"you improve the landing page"** | Enhanced the hero section with dynamic gradient blobs, modern typography, and better shadow highlights.<br/>`style: Improve landing page UI and hero section` |
-| **"ui is genuinely good, if there dark mode section it would be more good."** / **"the dark mode is awesome make it default"** | Exposed the ThemeToggle and changed the default application theme to dark mode.<br/>`feat: Set dark mode as default theme` |
-| **"Adding a sample proposal will help users understand the workflow imo"** | Injected a mock/sample proposal that renders when the on-chain list is empty to let new users preview the voting UI safely.<br/>`feat: Add sample proposal to help users understand the workflow` |
 
 ---
 
