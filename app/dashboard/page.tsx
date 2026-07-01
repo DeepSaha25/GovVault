@@ -41,6 +41,7 @@ export default function DashboardPage() {
   // Search and Filter State
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<'all' | 'active' | 'passed' | 'failed' | 'executed'>('all');
+  const [showGuide, setShowGuide] = useState(true);
 
   // Voting Calculator State per Proposal
   const [voteInputs, setVoteInputs] = useState<Record<number, { votes: number }>>({});
@@ -157,6 +158,27 @@ export default function DashboardPage() {
         <div className="rounded border border-slate-200 dark:border-surface-700 bg-white dark:bg-surface-800 p-4 text-slate-500 dark:text-slate-400 text-xs flex items-center gap-2.5">
           <FiInfo className="text-slate-400 h-4 w-4 flex-shrink-0" />
           <span>Governor contract ID is not configured. Please deploy the smart contracts first to fetch real-time state.</span>
+        </div>
+      )}
+
+      {showGuide && (
+        <div className="relative rounded border border-blue-200 dark:border-blue-900/50 bg-blue-50 dark:bg-blue-900/20 p-5">
+          <button 
+            onClick={() => setShowGuide(false)}
+            className="absolute top-4 right-4 text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+          >
+            <FiX className="h-4 w-4" />
+          </button>
+          <div className="flex gap-3">
+            <FiInfo className="text-blue-500 dark:text-blue-400 h-5 w-5 flex-shrink-0 mt-0.5" />
+            <div className="space-y-1">
+              <h3 className="text-sm font-bold text-blue-900 dark:text-blue-100">Welcome to GovVault! How to Vote</h3>
+              <p className="text-xs text-blue-800 dark:text-blue-200/80 max-w-3xl leading-relaxed">
+                GovVault uses <strong>Quadratic Voting</strong> to ensure fair governance. This means the cost to vote scales quadratically: <code className="bg-blue-100 dark:bg-blue-900/50 px-1 py-0.5 rounded text-[10px]">Cost = Votes²</code>. 
+                For example, casting 1 vote costs 1 token, but casting 4 votes costs 16 tokens. This protects the protocol from being dominated by a few wealthy participants. Use the slider on active proposals to see your cost!
+              </p>
+            </div>
+          </div>
         </div>
       )}
 
