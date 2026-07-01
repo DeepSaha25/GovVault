@@ -50,6 +50,7 @@ Based on the feedback collected from 10+ real users:
 
 ### 3. Monitoring & Analytics Integration
 We have integrated **Vercel Web Analytics** to track page views, unique visitors, bounce rates, and client-side performance metrics.
+
 ![Vercel Web Analytics](./sub%20assets/analytics.png)
 
 ---
