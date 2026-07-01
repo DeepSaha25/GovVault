@@ -381,17 +381,33 @@ export default function DashboardPage() {
                                 Cast Your Vote (Quadratic Cost)
                               </label>
                               <div className="flex items-center gap-2">
-                                <input
-                                  type="number"
-                                  min="1"
-                                  value={votesToCast}
-                                  onChange={(e) => updateVoteInput(prop.id, parseInt(e.target.value) || 1)}
-                                  className="w-16 h-9 rounded border border-slate-200 dark:border-surface-700 bg-white dark:bg-surface-800 text-xs text-black dark:text-white font-mono text-center focus:border-black focus:ring-0 focus:outline-none"
-                                  disabled={voteLoading}
-                                />
-                                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
-                                  Cost: {quadraticCost} Tokens
-                                </span>
+                                <div className="flex flex-col gap-2 w-full">
+                                  <div className="flex items-center gap-2">
+                                    <input
+                                      type="range"
+                                      min="1"
+                                      max="100"
+                                      value={votesToCast}
+                                      onChange={(e) => updateVoteInput(prop.id, parseInt(e.target.value) || 1)}
+                                      className="flex-1 h-1.5 bg-slate-200 dark:bg-surface-700 rounded-lg appearance-none cursor-pointer accent-black dark:accent-white"
+                                      disabled={voteLoading}
+                                    />
+                                    <input
+                                      type="number"
+                                      min="1"
+                                      value={votesToCast}
+                                      onChange={(e) => updateVoteInput(prop.id, parseInt(e.target.value) || 1)}
+                                      className="w-16 h-8 rounded border border-slate-200 dark:border-surface-700 bg-white dark:bg-surface-800 text-xs text-black dark:text-white font-mono text-center focus:border-black focus:ring-0 focus:outline-none"
+                                      disabled={voteLoading}
+                                    />
+                                  </div>
+                                  <div className="flex justify-between items-center px-1">
+                                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold">Votes: {votesToCast}</span>
+                                    <span className="text-[10px] text-black dark:text-white font-bold bg-slate-100 dark:bg-surface-700 px-2 py-0.5 rounded font-mono">
+                                      Cost: {quadraticCost} Tokens
+                                    </span>
+                                  </div>
+                                </div>
                               </div>
                             </div>
 
