@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} flex min-h-screen flex-col bg-[#fcf8fa] dark:bg-surface-900 text-[#1b1b1d] dark:text-white transition-colors duration-200`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
