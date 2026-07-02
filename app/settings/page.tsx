@@ -4,21 +4,38 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { GOVERNOR_CONTRACT_ID, TREASURY_CONTRACT_ID } from '@/lib/constants';
 import { FiSettings, FiSave, FiLock, FiClock, FiShield } from 'react-icons/fi';
+import { useWallet } from '@/hooks/useWallet';
+import { useGovernor } from '@/hooks/useGovernor';
 import toast from 'react-hot-toast';
 
 export default function SettingsPage() {
+  const { publicKey, isConnected } = useWallet();
+  const { createProposal } = useGovernor(publicKey || undefined);
   const [loading, setLoading] = useState(false);
   const [votingPeriod, setVotingPeriod] = useState('7200'); // blocks
   const [timelockDelay, setTimelockDelay] = useState('17280'); // blocks
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isConnected || !publicKey) {
+      toast.error('Please connect your wallet first.');
+      return;
+    }
+
     setLoading(true);
-    // Simulate contract parameter update proposal
-    setTimeout(() => {
+    try {
+      const title = `[Config] Update DAO Parameters`;
+      const description = `Proposing to update the core parameters of the DAO:\n- Voting Period: ${votingPeriod} ledgers\n- Timelock Delay: ${timelockDelay} ledgers`;
+      
+      // Target: Governor Contract, Amount: 0 XLM
+      await createProposal(title, description, GOVERNOR_CONTRACT_ID, '0');
+      toast.success('Configuration update proposal submitted successfully!');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Failed to submit proposal';
+      toast.error(msg);
+    } finally {
       setLoading(false);
-      toast.success('Configuration update proposed! View it on the dashboard to vote.');
-    }, 1500);
+    }
   };
 
   return (
@@ -45,7 +62,8 @@ export default function SettingsPage() {
                     type="number" 
                     value={votingPeriod}
                     onChange={(e) => setVotingPeriod(e.target.value)}
-                    className="w-full pl-10 pr-3 py-2 border border-slate-300 dark:border-surface-600 rounded focus:outline-none focus:ring-1 focus:ring-black"
+                    disabled={!isConnected}
+                    className="w-full pl-10 pr-3 py-2 border border-slate-300 dark:border-surface-600 rounded focus:outline-none focus:ring-1 focus:ring-black disabled:opacity-60"
                   />
                 </div>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Approx. {Math.round(Number(votingPeriod) * 5 / 60 / 60)} hours (assuming 5s per ledger)</p>
@@ -59,7 +77,8 @@ export default function SettingsPage() {
                     type="number" 
                     value={timelockDelay}
                     onChange={(e) => setTimelockDelay(e.target.value)}
-                    className="w-full pl-10 pr-3 py-2 border border-slate-300 dark:border-surface-600 rounded focus:outline-none focus:ring-1 focus:ring-black"
+                    disabled={!isConnected}
+                    className="w-full pl-10 pr-3 py-2 border border-slate-300 dark:border-surface-600 rounded focus:outline-none focus:ring-1 focus:ring-black disabled:opacity-60"
                   />
                 </div>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Approx. {Math.round(Number(timelockDelay) * 5 / 60 / 60)} hours mandatory wait before execution.</p>
@@ -70,8 +89,12 @@ export default function SettingsPage() {
               Note: Changing these parameters requires a formal DAO vote. Clicking save will create a new proposal.
             </div>
 
-            <Button type="submit" disabled={loading} className="w-full flex items-center justify-center gap-2">
-              {loading ? 'Proposing...' : <><FiSave /> Propose Parameter Update</>}
+            <Button 
+              type="submit" 
+              disabled={loading || !isConnected} 
+              className="w-full flex items-center justify-center gap-2"
+            >
+              {loading ? 'Proposing...' : !isConnected ? 'Connect Wallet to Propose' : <><FiSave /> Propose Parameter Update</>}
             </Button>
           </form>
         </div>
