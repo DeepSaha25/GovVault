@@ -25,7 +25,7 @@ import toast from 'react-hot-toast';
 
 export default function DashboardPage() {
   const { publicKey, isConnected } = useWallet();
-  const { proposals, loading, createProposal, castVote, executeProposal, evaluateResult } = useGovernor(
+  const { proposals, treasuryBalance, loading, createProposal, castVote, executeProposal, evaluateResult } = useGovernor(
     publicKey || undefined
   );
   const { events, loading: eventsLoading } = useContractEvents(GOVERNOR_CONTRACT_ID);
@@ -162,6 +162,23 @@ export default function DashboardPage() {
   // Timelocked Treasury Queue items
   const treasuryQueue = proposals.filter((p) => p.status === 'passed');
 
+  const timelockedAmount = proposals
+    .filter((p) => p.status === 'passed')
+    .reduce((acc, p) => acc + parseFloat(p.amount || '0'), 0);
+
+  const totalVotesCast = proposals
+    .filter((p) => p.id !== 9999)
+    .reduce((acc, p) => acc + p.yesVotes + p.noVotes, 0);
+
+  const uniqueParticipants = Array.from(
+    new Set([
+      ...proposals.filter((p) => p.id !== 9999).map((p) => p.proposer),
+      ...events
+        .filter((e) => e.topic[0] === 'vote')
+        .map((e) => (Array.isArray(e.value) ? String(e.value[0]) : '')),
+    ])
+  ).filter((addr) => addr && addr.length > 5).length;
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 space-y-8 animate-fade-in bg-[#fcf8fa] dark:bg-surface-900">
       {/* Header & Subtitle */}
@@ -215,18 +232,22 @@ export default function DashboardPage() {
         <div className="p-6">
           <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">Total Treasury Pool</p>
           <div className="flex flex-col">
-            <span className="text-xl font-bold text-black dark:text-white font-sans">1,245,890.00 XLM</span>
-            <span className="text-[10px] font-mono text-slate-400 mt-1">Timelocked: 340,000 XLM</span>
+            <span className="text-xl font-bold text-black dark:text-white font-sans">
+              {parseFloat(treasuryBalance).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} XLM
+            </span>
+            <span className="text-[10px] font-mono text-slate-400 mt-1">
+              Timelocked: {timelockedAmount.toLocaleString()} XLM
+            </span>
           </div>
         </div>
         <div className="p-6">
           <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">Active Proposals</p>
           <div className="flex flex-col">
             <span className="text-xl font-bold text-black dark:text-white font-sans">
-              {proposals.filter((p) => p.status === 'active').length} Proposals
+              {proposals.filter((p) => p.status === 'active' && p.id !== 9999).length} Proposals
             </span>
             <div className="flex items-center gap-1.5 mt-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/300 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
               <span className="text-[10px] font-mono text-slate-400">Voting Live</span>
             </div>
           </div>
@@ -234,15 +255,19 @@ export default function DashboardPage() {
         <div className="p-6">
           <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">Quadratic Votes Cast</p>
           <div className="flex flex-col">
-            <span className="text-xl font-bold text-black dark:text-white font-sans">12,840 Votes</span>
-            <span className="text-[10px] font-mono text-slate-400 mt-1">↑ 12% from last epoch</span>
+            <span className="text-xl font-bold text-black dark:text-white font-sans">
+              {totalVotesCast.toLocaleString()} Votes
+            </span>
+            <span className="text-[10px] font-mono text-slate-400 mt-1">On-Chain Total</span>
           </div>
         </div>
         <div className="p-6">
-          <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">DAO Members</p>
+          <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">DAO Participants</p>
           <div className="flex flex-col">
-            <span className="text-xl font-bold text-black dark:text-white font-sans">1,894 Wallets</span>
-            <span className="text-[10px] font-mono text-slate-400 mt-1">Active on Stellar Soroban</span>
+            <span className="text-xl font-bold text-black dark:text-white font-sans">
+              {uniqueParticipants} Wallets
+            </span>
+            <span className="text-[10px] font-mono text-slate-400 mt-1">Active on Stellar Testnet</span>
           </div>
         </div>
       </div>
