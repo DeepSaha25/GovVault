@@ -28,7 +28,15 @@ export default function AnalyticsPage() {
         </div>
       </div>
 
-      {(loading || eventsLoading) ? (
+      {!publicKey ? (
+        <div className="text-center py-16 rounded border border-dashed border-slate-200 dark:border-surface-700 bg-white dark:bg-surface-800">
+          <FiPieChart className="mx-auto h-12 w-12 text-slate-300 mb-3" />
+          <h3 className="text-sm font-bold text-black dark:text-white">Wallet Connection Required</h3>
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
+            Please connect your Freighter wallet to query and view real-time governance metrics and analytics.
+          </p>
+        </div>
+      ) : (loading || eventsLoading) ? (
         <div className="flex items-center justify-center p-12">
           <FiActivity className="h-8 w-8 animate-spin text-slate-400" />
         </div>
@@ -73,11 +81,20 @@ export default function AnalyticsPage() {
             <div className="space-y-4">
               <div>
                 <div className="flex justify-between text-sm mb-1">
+                  <span>Active</span>
+                  <span className="font-medium">{activeProposals}</span>
+                </div>
+                <div className="w-full bg-slate-100 dark:bg-surface-700 rounded-full h-2">
+                  <div className="bg-amber-500 h-2 rounded-full" style={{ width: `${totalProposals > 0 ? (activeProposals / totalProposals) * 100 : 0}%` }}></div>
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between text-sm mb-1">
                   <span>Executed / Passed</span>
                   <span className="font-medium">{executedProposals + passedProposals}</span>
                 </div>
                 <div className="w-full bg-slate-100 dark:bg-surface-700 rounded-full h-2">
-                  <div className="bg-emerald-50 dark:bg-emerald-900/300 h-2 rounded-full" style={{ width: `${successRate}%` }}></div>
+                  <div className="bg-emerald-600 h-2 rounded-full" style={{ width: `${successRate}%` }}></div>
                 </div>
               </div>
               <div>
@@ -86,7 +103,7 @@ export default function AnalyticsPage() {
                   <span className="font-medium">{failedProposals}</span>
                 </div>
                 <div className="w-full bg-slate-100 dark:bg-surface-700 rounded-full h-2">
-                  <div className="bg-rose-50 dark:bg-rose-900/300 h-2 rounded-full" style={{ width: `${totalProposals > 0 ? (failedProposals / totalProposals) * 100 : 0}%` }}></div>
+                  <div className="bg-rose-600 h-2 rounded-full" style={{ width: `${totalProposals > 0 ? (failedProposals / totalProposals) * 100 : 0}%` }}></div>
                 </div>
               </div>
             </div>
