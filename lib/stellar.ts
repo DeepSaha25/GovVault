@@ -14,12 +14,12 @@ import {
 
 export class StellarHelper {
   private server: StellarSdk.Horizon.Server;
-  private rpcServer: StellarSdk.SorobanRpc.Server;
+  private rpcServer: StellarSdk.rpc.Server;
   private kit: StellarWalletsKit | null = null;
 
   constructor() {
     this.server = new StellarSdk.Horizon.Server(HORIZON_URL);
-    this.rpcServer = new StellarSdk.SorobanRpc.Server(STELLAR_RPC_URL);
+    this.rpcServer = new StellarSdk.rpc.Server(STELLAR_RPC_URL);
   }
 
   /* ─── Wallet ─── */
@@ -142,7 +142,7 @@ export class StellarHelper {
 
     const simulation = await this.rpcServer.simulateTransaction(tx);
 
-    if (StellarSdk.SorobanRpc.Api.isSimulationError(simulation)) {
+    if (StellarSdk.rpc.Api.isSimulationError(simulation)) {
       const errMsg = simulation.error || 'Simulation failed';
       let friendlyMessage = `Contract simulation failed: ${errMsg}`;
 
@@ -161,7 +161,7 @@ export class StellarHelper {
       throw new Error(friendlyMessage);
     }
 
-    const preparedTx = StellarSdk.SorobanRpc.assembleTransaction(tx, simulation).build();
+    const preparedTx = StellarSdk.rpc.assembleTransaction(tx, simulation).build();
 
     const { signedTxXdr } = await this.getKit().signTransaction(preparedTx.toXDR(), {
       networkPassphrase: NETWORK_PASSPHRASE,
@@ -212,7 +212,7 @@ export class StellarHelper {
 
     const simulation = await this.rpcServer.simulateTransaction(tx);
 
-    if (StellarSdk.SorobanRpc.Api.isSimulationError(simulation)) {
+    if (StellarSdk.rpc.Api.isSimulationError(simulation)) {
       throw new Error(`Read failed: ${simulation.error}`);
     }
 

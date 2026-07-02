@@ -2,19 +2,39 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { stellar } from '@/lib/stellar';
-import { GOVERNOR_CONTRACT_ID } from '@/lib/constants';
+import { GOVERNOR_CONTRACT_ID, TREASURY_CONTRACT_ID } from '@/lib/constants';
 import * as StellarSdk from '@stellar/stellar-sdk';
 import type { Proposal } from '@/lib/types';
 import toast from 'react-hot-toast';
 
 export function useGovernor(publicKey: string | undefined) {
   const [proposals, setProposals] = useState<Proposal[]>([]);
+  const [treasuryBalance, setTreasuryBalance] = useState<string>('0');
   const [loading, setLoading] = useState(false);
 
   const fetchProposals = useCallback(async () => {
     if (!GOVERNOR_CONTRACT_ID || !publicKey) return;
     try {
       setLoading(true);
+
+      // Fetch Treasury contract native balance from Stellar Asset Contract
+      if (TREASURY_CONTRACT_ID) {
+        try {
+          const balVal = await stellar.simulateRead({
+            publicKey,
+            contractId: 'CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC',
+            method: 'balance',
+            args: [StellarSdk.nativeToScVal(TREASURY_CONTRACT_ID, { type: 'address' })],
+          });
+          if (balVal) {
+            const rawBal = StellarSdk.scValToNative(balVal);
+            setTreasuryBalance(stellar.stroopsToXlm(rawBal));
+          }
+        } catch (err) {
+          console.error('Failed to load treasury balance:', err);
+        }
+      }
+
       const countVal = await stellar.simulateRead({
         publicKey,
         contractId: GOVERNOR_CONTRACT_ID,
@@ -100,7 +120,7 @@ export function useGovernor(publicKey: string | undefined) {
       StellarSdk.nativeToScVal(publicKey, { type: 'address' }),
       StellarSdk.nativeToScVal(proposalId, { type: 'u32' }),
       StellarSdk.nativeToScVal(BigInt(votes), { type: 'i128' }),
-      StellarSdk.nativeToScVal(approve, { type: 'bool' }),
+      StellarSdk.nativeToScVal(approve),
     ];
 
     const { hash } = await stellar.buildAndSignTx({
@@ -155,6 +175,7 @@ export function useGovernor(publicKey: string | undefined) {
 
   return {
     proposals,
+    treasuryBalance,
     loading,
     refetch: fetchProposals,
     createProposal,
