@@ -4,7 +4,8 @@ import { useGovernor } from '@/hooks/useGovernor';
 import { useWallet } from '@/hooks/useWallet';
 import { useContractEvents } from '@/hooks/useContractEvents';
 import { GOVERNOR_CONTRACT_ID } from '@/lib/constants';
-import { FiActivity, FiPieChart, FiTrendingUp, FiUsers } from 'react-icons/fi';
+import { FiActivity, FiPieChart, FiTrendingUp, FiUsers, FiExternalLink } from 'react-icons/fi';
+import { stellar } from '@/lib/stellar';
 
 export default function AnalyticsPage() {
   const { publicKey } = useWallet();
@@ -107,6 +108,51 @@ export default function AnalyticsPage() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Recent Event Log Table */}
+          <div className="bg-white dark:bg-surface-800 rounded shadow-sm border border-slate-200 dark:border-surface-700 p-6 space-y-4">
+            <h2 className="text-lg font-bold">Recent Contract Events</h2>
+            {events.length === 0 ? (
+              <p className="text-sm text-slate-500 italic">No events found in the recent ledger entries.</p>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-slate-200 dark:divide-surface-700 text-xs text-left">
+                  <thead>
+                    <tr className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                      <th className="py-3 px-4">Event Topic</th>
+                      <th className="py-3 px-4">Ledger</th>
+                      <th className="py-3 px-4">Payload</th>
+                      <th className="py-3 px-4">Transaction</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 dark:divide-surface-700/50 font-mono">
+                    {events.slice(0, 10).map((evt) => (
+                      <tr key={evt.id} className="hover:bg-slate-50 dark:hover:bg-surface-750/30 transition-colors">
+                        <td className="py-3 px-4 font-semibold text-black dark:text-white">
+                          {evt.topic.join(' / ')}
+                        </td>
+                        <td className="py-3 px-4 text-slate-500">{evt.ledger}</td>
+                        <td className="py-3 px-4 max-w-xs truncate text-slate-500" title={JSON.stringify(evt.value)}>
+                          {JSON.stringify(evt.value, (k, v) => typeof v === 'bigint' ? v.toString() : v)}
+                        </td>
+                        <td className="py-3 px-4">
+                          <a
+                            href={stellar.getExplorerLink(evt.txHash, 'tx')}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-500 hover:underline inline-flex items-center gap-1"
+                          >
+                            {stellar.formatAddress(evt.txHash, 6, 6)}
+                            <FiExternalLink className="h-3 w-3" />
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
       )}
