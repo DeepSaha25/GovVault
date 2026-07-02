@@ -20,7 +20,15 @@ export default function HistoryPage() {
         <p className="text-slate-600 dark:text-slate-300">Past governance decisions, including executed treasury transfers and failed proposals.</p>
       </div>
 
-      {loading ? (
+      {!publicKey ? (
+        <div className="text-center py-16 rounded border border-dashed border-slate-200 dark:border-surface-700 bg-white dark:bg-surface-800 flex flex-col items-center justify-center">
+          <FiArchive className="h-10 w-10 text-slate-300 mb-3" />
+          <h3 className="text-sm font-bold text-black dark:text-white">Wallet Connection Required</h3>
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
+            Please connect your Freighter wallet to view historical governance proposals and past treasury payouts.
+          </p>
+        </div>
+      ) : loading ? (
         <div className="flex justify-center p-12">
           <FiLoader className="h-8 w-8 animate-spin text-slate-400" />
         </div>
@@ -58,7 +66,7 @@ export default function HistoryPage() {
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-black dark:text-white">{Number(proposal.amount) / 10000000} XLM</span>
+                  <span className="font-bold text-black dark:text-white">{proposal.amount} XLM</span>
                 </div>
                 <div className="flex items-center gap-1.5 ml-auto">
                   <FiCalendar className="h-4 w-4" />
