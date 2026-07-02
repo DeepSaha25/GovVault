@@ -31,12 +31,8 @@ export default function LandingPage() {
           <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[40rem] h-[40rem] bg-blue-400/10 dark:bg-blue-900/10 rounded-full blur-3xl opacity-50 mix-blend-multiply dark:mix-blend-lighten" />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-36">
+        <div className="relative mx-auto max-w-7xl px-4 pt-12 pb-24 sm:px-6 lg:px-8 lg:pt-16 lg:pb-28">
           <div className="mx-auto max-w-3xl text-center space-y-8">
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-surface-700 bg-white/50 dark:bg-surface-800/50 backdrop-blur-sm px-5 py-2 text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200 shadow-sm">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              GovVault Protocol Core Active
-            </div>
 
             <h1 className="text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl font-sans drop-shadow-sm">
               Democratic Governance with{' '}
