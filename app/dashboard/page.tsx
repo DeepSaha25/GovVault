@@ -1,11 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useWallet } from '@/hooks/useWallet';
 import { useGovernor } from '@/hooks/useGovernor';
 import { useContractEvents } from '@/hooks/useContractEvents';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+import { ProposalCountdown } from '@/components/ui/ProposalCountdown';
 import { stellar } from '@/lib/stellar';
 import { GOVERNOR_CONTRACT_ID } from '@/lib/constants';
 import {
@@ -154,7 +156,8 @@ export default function DashboardPage() {
       status: 'active',
       proposer: 'GABC...TEST',
       createdAt: Date.now(),
-      executionTime: 0
+      executionTime: 0,
+      endTime: Math.floor(Date.now() / 1000) + 12 * 3600 // 12 hours from now
     } as any];
     showingSample = true;
   }
@@ -419,14 +422,49 @@ export default function DashboardPage() {
                     >
                       {/* Left Part of Card */}
                       <div className="flex-1 space-y-3">
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-mono bg-slate-100 dark:bg-surface-700 border border-slate-200 dark:border-surface-700 px-2 py-0.5 text-slate-600 dark:text-slate-300 rounded">
-                            #GV-{prop.id}
-                          </span>
-                          <Badge status={prop.status} />
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-mono bg-slate-100 dark:bg-surface-700 border border-slate-200 dark:border-surface-700 px-2 py-0.5 text-slate-600 dark:text-slate-300 rounded">
+                              #GV-{prop.id}
+                            </span>
+                            <Badge status={prop.status} />
+                          </div>
+                          {prop.status === 'active' && prop.endTime > 0 && (
+                            <ProposalCountdown targetTime={prop.endTime} prefix="Ends In:" />
+                          )}
+                          {prop.status === 'passed' && prop.executionTime > 0 && (
+                            <ProposalCountdown targetTime={prop.executionTime} prefix="Timelock:" />
+                          )}
                         </div>
-                        <h3 className="text-base font-bold text-black dark:text-white font-sans">{prop.title}</h3>
+                        <Link href={`/proposals/${prop.id}`} className="hover:underline group flex items-center gap-1">
+                          <h3 className="text-base font-bold text-black dark:text-white font-sans group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{prop.title}</h3>
+                        </Link>
                         <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{prop.description}</p>
+
+                        {/* Vote Distribution Bar */}
+                        {(() => {
+                          const totalVotes = prop.yesVotes + prop.noVotes;
+                          const yesPercentage = totalVotes > 0 ? (prop.yesVotes / totalVotes) * 100 : 50;
+                          const noPercentage = totalVotes > 0 ? (prop.noVotes / totalVotes) * 100 : 50;
+                          return (
+                            <div className="space-y-1.5 pt-1">
+                              <div className="flex justify-between text-[9px] font-semibold uppercase tracking-wider text-slate-400">
+                                <span className="text-emerald-600 dark:text-emerald-400 font-bold">{prop.yesVotes} YES ({totalVotes > 0 ? yesPercentage.toFixed(0) : 0}%)</span>
+                                <span className="text-rose-600 dark:text-rose-400 font-bold">{prop.noVotes} NO ({totalVotes > 0 ? noPercentage.toFixed(0) : 0}%)</span>
+                              </div>
+                              <div className="w-full bg-slate-100 dark:bg-surface-700 rounded-full h-2 overflow-hidden flex border border-slate-200/50 dark:border-surface-700/50">
+                                {totalVotes === 0 ? (
+                                  <div className="w-full bg-slate-200 dark:bg-surface-700 h-full rounded-full" />
+                                ) : (
+                                  <>
+                                    <div className="bg-emerald-500 h-full transition-all duration-500" style={{ width: `${yesPercentage}%` }} />
+                                    <div className="bg-rose-500 h-full transition-all duration-500" style={{ width: `${noPercentage}%` }} />
+                                  </>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })()}
 
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                           <div>
@@ -439,11 +477,11 @@ export default function DashboardPage() {
                           </div>
                           <div>
                             <span className="block text-slate-400 text-[9px] mb-0.5">Yes Votes</span>
-                            <span className="text-emerald-700 font-bold">{prop.yesVotes}</span>
+                            <span className="text-emerald-700 dark:text-emerald-400 font-bold">{prop.yesVotes}</span>
                           </div>
                           <div>
                             <span className="block text-slate-400 text-[9px] mb-0.5">No Votes</span>
-                            <span className="text-rose-700 font-bold">{prop.noVotes}</span>
+                            <span className="text-rose-700 dark:text-rose-400 font-bold">{prop.noVotes}</span>
                           </div>
                         </div>
                       </div>
@@ -542,6 +580,13 @@ export default function DashboardPage() {
                             Rejected
                           </div>
                         )}
+
+                        <Link 
+                          href={`/proposals/${prop.id}`}
+                          className="text-[9px] text-center text-slate-500 hover:text-black dark:text-slate-400 dark:hover:text-white uppercase font-bold tracking-wider pt-2 border-t border-slate-100 dark:border-surface-750 block"
+                        >
+                          View Details & Audit &rarr;
+                        </Link>
                       </div>
                     </div>
                   );
