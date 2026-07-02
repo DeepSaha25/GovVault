@@ -77,35 +77,74 @@ export default function AnalyticsPage() {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-surface-800 rounded shadow-sm border border-slate-200 dark:border-surface-700 p-6">
-            <h2 className="text-lg font-bold mb-4">Proposal Status Breakdown</h2>
-            <div className="space-y-4">
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span>Active</span>
-                  <span className="font-medium">{activeProposals}</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Status Breakdown Card */}
+            <div className="bg-white dark:bg-surface-800 rounded shadow-sm border border-slate-200 dark:border-surface-700 p-6">
+              <h2 className="text-lg font-bold mb-4">Proposal Status Breakdown</h2>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span>Active</span>
+                    <span className="font-medium">{activeProposals}</span>
+                  </div>
+                  <div className="w-full bg-slate-100 dark:bg-surface-700 rounded-full h-2">
+                    <div className="bg-amber-500 h-2 rounded-full" style={{ width: `${totalProposals > 0 ? (activeProposals / totalProposals) * 100 : 0}%` }}></div>
+                  </div>
                 </div>
-                <div className="w-full bg-slate-100 dark:bg-surface-700 rounded-full h-2">
-                  <div className="bg-amber-500 h-2 rounded-full" style={{ width: `${totalProposals > 0 ? (activeProposals / totalProposals) * 100 : 0}%` }}></div>
+                <div>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span>Executed / Passed</span>
+                    <span className="font-medium">{executedProposals + passedProposals}</span>
+                  </div>
+                  <div className="w-full bg-slate-100 dark:bg-surface-700 rounded-full h-2">
+                    <div className="bg-emerald-600 h-2 rounded-full" style={{ width: `${successRate}%` }}></div>
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span>Failed</span>
+                    <span className="font-medium">{failedProposals}</span>
+                  </div>
+                  <div className="w-full bg-slate-100 dark:bg-surface-700 rounded-full h-2">
+                    <div className="bg-rose-600 h-2 rounded-full" style={{ width: `${totalProposals > 0 ? (failedProposals / totalProposals) * 100 : 0}%` }}></div>
+                  </div>
                 </div>
               </div>
+            </div>
+
+            {/* Quadratic Cost Curve Card */}
+            <div className="bg-white dark:bg-surface-800 rounded shadow-sm border border-slate-200 dark:border-surface-700 p-6 flex flex-col justify-between">
               <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span>Executed / Passed</span>
-                  <span className="font-medium">{executedProposals + passedProposals}</span>
-                </div>
-                <div className="w-full bg-slate-100 dark:bg-surface-700 rounded-full h-2">
-                  <div className="bg-emerald-600 h-2 rounded-full" style={{ width: `${successRate}%` }}></div>
-                </div>
+                <h2 className="text-lg font-bold">Quadratic Cost Scaling</h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  How token cost grows exponentially ($cost = votes^2$) to protect community voting consensus.
+                </p>
               </div>
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span>Failed</span>
-                  <span className="font-medium">{failedProposals}</span>
-                </div>
-                <div className="w-full bg-slate-100 dark:bg-surface-700 rounded-full h-2">
-                  <div className="bg-rose-600 h-2 rounded-full" style={{ width: `${totalProposals > 0 ? (failedProposals / totalProposals) * 100 : 0}%` }}></div>
-                </div>
+              
+              <div className="py-2 flex items-center justify-center">
+                <svg className="w-full h-28 max-w-sm text-slate-300 dark:text-surface-700" viewBox="0 0 100 30" fill="none">
+                  {/* Grid Lines */}
+                  <line x1="0" y1="30" x2="100" y2="30" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
+                  <line x1="0" y1="0" x2="0" y2="30" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
+                  
+                  {/* Curve Path (y = 30 - 30 * (x/100)^2) */}
+                  <path d="M 0 30 Q 50 28 100 0" stroke="#f59e0b" strokeWidth="1.5" />
+                  
+                  {/* Key Annotations */}
+                  <circle cx="0" cy="30" r="1.5" fill="#f59e0b" />
+                  <circle cx="30" cy="27" r="1.5" fill="#f59e0b" />
+                  <circle cx="60" cy="19" r="1.5" fill="#f59e0b" />
+                  <circle cx="100" cy="0" r="1.5" fill="#f59e0b" />
+                  
+                  <text x="35" y="25" fill="currentColor" className="text-[3px] font-sans font-semibold">3 Votes = 9 Tokens</text>
+                  <text x="65" y="15" fill="currentColor" className="text-[3px] font-sans font-semibold">6 Votes = 36 Tokens</text>
+                  <text x="75" y="3" fill="#f59e0b" className="text-[3px] font-sans font-bold">10 Votes = 100 Tokens</text>
+                </svg>
+              </div>
+
+              <div className="flex justify-between items-center text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-surface-750">
+                <span>1 Vote = 1 Token</span>
+                <span>Whale Prevention: 10x More Costly</span>
               </div>
             </div>
           </div>
