@@ -233,7 +233,7 @@ export default function LandingPage() {
   }, [mounted]);
 
   return (
-    <div ref={containerRef} className="relative bg-[#fcf8fa] dark:bg-surface-900 overflow-x-hidden min-h-screen">
+    <div ref={containerRef} className="relative bg-transparent overflow-x-hidden min-h-screen">
       {/* 3D fixed background canvas */}
       {mounted && (
         <canvas 
