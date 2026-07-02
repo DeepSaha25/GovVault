@@ -5,6 +5,7 @@ import { stellar } from '@/lib/stellar';
 import { GOVERNOR_CONTRACT_ID, TREASURY_CONTRACT_ID } from '@/lib/constants';
 import * as StellarSdk from '@stellar/stellar-sdk';
 import type { Proposal } from '@/lib/types';
+import { FiExternalLink } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 
 export function useGovernor(publicKey: string | undefined) {
@@ -107,7 +108,22 @@ export function useGovernor(publicKey: string | undefined) {
       args,
     });
 
-    toast.success('Proposal transaction submitted!');
+    toast.success(
+      (t) => (
+        <span className="flex items-center gap-1 text-xs">
+          Proposal transaction submitted!
+          <a 
+            href={stellar.getExplorerLink(hash, 'tx')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline text-blue-500 hover:text-blue-600 font-semibold inline-flex items-center gap-0.5 ml-1"
+          >
+            View Tx <FiExternalLink className="h-3 w-3" />
+          </a>
+        </span>
+      ),
+      { duration: 5500 }
+    );
     await fetchProposals();
     return hash;
   };
@@ -131,7 +147,22 @@ export function useGovernor(publicKey: string | undefined) {
       args,
     });
 
-    toast.success('Vote cast successfully!');
+    toast.success(
+      (t) => (
+        <span className="flex items-center gap-1 text-xs">
+          Vote cast successfully!
+          <a 
+            href={stellar.getExplorerLink(hash, 'tx')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline text-blue-500 hover:text-blue-600 font-semibold inline-flex items-center gap-0.5 ml-1"
+          >
+            View Tx <FiExternalLink className="h-3 w-3" />
+          </a>
+        </span>
+      ),
+      { duration: 5500 }
+    );
     await fetchProposals();
     return hash;
   };
@@ -148,7 +179,22 @@ export function useGovernor(publicKey: string | undefined) {
       args: [StellarSdk.nativeToScVal(proposalId, { type: 'u32' })],
     });
 
-    toast.success('Proposal executed, treasury grant released!');
+    toast.success(
+      (t) => (
+        <span className="flex items-center gap-1 text-xs">
+          Proposal executed, treasury grant released!
+          <a 
+            href={stellar.getExplorerLink(hash, 'tx')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline text-blue-500 hover:text-blue-600 font-semibold inline-flex items-center gap-0.5 ml-1"
+          >
+            View Tx <FiExternalLink className="h-3 w-3" />
+          </a>
+        </span>
+      ),
+      { duration: 5500 }
+    );
     await fetchProposals();
     return hash;
   };
@@ -165,7 +211,22 @@ export function useGovernor(publicKey: string | undefined) {
       args: [StellarSdk.nativeToScVal(proposalId, { type: 'u32' })],
     });
 
-    toast.success('Proposal voting ended and evaluated!');
+    toast.success(
+      (t) => (
+        <span className="flex items-center gap-1 text-xs">
+          Proposal voting ended and evaluated!
+          <a 
+            href={stellar.getExplorerLink(hash, 'tx')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline text-blue-500 hover:text-blue-600 font-semibold inline-flex items-center gap-0.5 ml-1"
+          >
+            View Tx <FiExternalLink className="h-3 w-3" />
+          </a>
+        </span>
+      ),
+      { duration: 5500 }
+    );
     await fetchProposals();
     return hash;
   };
