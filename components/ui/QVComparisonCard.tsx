@@ -24,7 +24,7 @@ export function QVComparisonCard({ yesVotes, noVotes, status }: QVComparisonCard
   const isDifferent = qvOutcome !== linearOutcome;
 
   return (
-    <div className="border border-slate-200 dark:border-surface-700 rounded-lg p-5 bg-slate-50 dark:bg-surface-850/50 space-y-4">
+    <div className="border border-slate-200 dark:border-surface-700 rounded-lg p-5 bg-slate-50 dark:bg-surface-800/50 space-y-4">
       <div className="flex items-center justify-between">
         <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
           <FiShield className="text-blue-500 h-4 w-4" /> Quadratic Governance Analysis

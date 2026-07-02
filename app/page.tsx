@@ -300,7 +300,7 @@ export default function LandingPage() {
       </section>
 
       {/* Task Checklist Tracker */}
-      <section className="relative border-t border-slate-200/50 dark:border-surface-700/50 bg-slate-50/80 dark:bg-surface-850/80 backdrop-blur-sm z-10">
+      <section className="relative border-t border-slate-200/50 dark:border-surface-700/50 bg-slate-50/80 dark:bg-surface-800/80 backdrop-blur-sm z-10">
         <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
           <div className="infra-card rounded border border-slate-200/60 dark:border-surface-700/60 bg-white/90 dark:bg-surface-800/90 backdrop-blur-sm p-8 shadow-sm opacity-0">
             <div className="space-y-1 mb-6">
