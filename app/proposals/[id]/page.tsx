@@ -7,6 +7,7 @@ import { useWallet } from '@/hooks/useWallet';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { ProposalCountdown } from '@/components/ui/ProposalCountdown';
+import { QVComparisonCard } from '@/components/ui/QVComparisonCard';
 import { stellar } from '@/lib/stellar';
 import { FiCheck, FiX, FiPlay, FiLock, FiUnlock, FiInfo, FiActivity, FiArrowLeft, FiSliders } from 'react-icons/fi';
 import Link from 'next/link';
@@ -149,6 +150,14 @@ export default function ProposalDetailPage() {
                     )}
                   </div>
                 </div>
+              </div>
+
+              <div className="border-t border-slate-100 dark:border-surface-700 pt-6">
+                <QVComparisonCard 
+                  yesVotes={proposal.yesVotes}
+                  noVotes={proposal.noVotes}
+                  status={proposal.status}
+                />
               </div>
             </div>
 
