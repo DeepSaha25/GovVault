@@ -19,14 +19,34 @@ export default function FaucetPage() {
 
     setLoading(true);
     try {
-      // Simulate faucet claim logic (as we don't have the explicit faucet endpoint mapped in stellar.ts yet, we simulate the experience)
-      // In a real scenario, this would call a backend endpoint or a specific smart contract function to mint tokens.
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const res = await fetch(`https://friendbot.stellar.org/?addr=${publicKey}`);
+      if (!res.ok) {
+        throw new Error('Friendbot funding failed');
+      }
+      const data = await res.json();
+      const hash = data.hash;
       
       setClaimed(true);
-      toast.success('Successfully claimed 1000 Test Governance Tokens!');
+      toast.success(
+        (t) => (
+          <span className="flex items-center gap-1">
+            Account funded with Testnet XLM!
+            {hash && (
+              <a 
+                href={`https://stellar.expert/explorer/testnet/tx/${hash}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline text-blue-400 hover:text-blue-300 font-semibold inline-flex items-center gap-0.5 ml-1"
+              >
+                View Tx <FiExternalLink className="h-3.5 w-3.5" />
+              </a>
+            )}
+          </span>
+        ),
+        { duration: 6000 }
+      );
     } catch (error) {
-      toast.error('Failed to claim tokens. Please try again later.');
+      toast.error('Failed to claim tokens. Please ensure address is valid and try again.');
     } finally {
       setLoading(false);
     }
