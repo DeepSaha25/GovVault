@@ -88,11 +88,11 @@ Based on the community feedback collected in June 2026, the following improvemen
 
 | Feedback Request | Implementation / Commit |
 | :--- | :--- |
-| **"Provide a simple visual slider or input calculator on the voting panel that shows exactly how many tokens will be consumed for votes before committing to the transaction (e.g. showing that 4 votes will cost 16 tokens)."** | Replaced numeric input with an interactive range slider for immediate visual feedback on quadratic cost.<br/>`feat: Add visual slider for quadratic voting cost calculation` |
-| **"add some guide to the user it would be able to make UX easy and subtle"** | Added a dismissible welcome guide/info banner on the dashboard explaining the quadratic voting rules.<br/>`feat: Add user guide explaining quadratic voting rules` |
-| **"you improve the landing page"** | Enhanced the hero section with dynamic gradient blobs, modern typography, and better shadow highlights.<br/>`style: Improve landing page UI and hero section` |
-| **"ui is genuinely good, if there dark mode section it would be more good."** / **"the dark mode is awesome make it default"** | Exposed the ThemeToggle and changed the default application theme to dark mode.<br/>`feat: Set dark mode as default theme` |
-| **"Adding a sample proposal will help users understand the workflow imo"** | Injected a mock/sample proposal that renders when the on-chain list is empty to let new users preview the voting UI safely.<br/>`feat: Add sample proposal to help users understand the workflow` |
+| **"Provide a simple visual slider or input calculator on the voting panel that shows exactly how many tokens will be consumed for votes before committing to the transaction (e.g. showing that 4 votes will cost 16 tokens)."** | Replaced numeric input with an interactive range slider for immediate visual feedback on quadratic cost.<br/>[`feat: Add visual slider for quadratic voting cost calculation`](https://github.com/DeepSaha25/GovVault/commit/7bcb712) |
+| **"add some guide to the user it would be able to make UX easy and subtle"** | Added a dismissible welcome guide/info banner on the dashboard explaining the quadratic voting rules.<br/>[`feat: Add user guide explaining quadratic voting rules`](https://github.com/DeepSaha25/GovVault/commit/c386317) |
+| **"you improve the landing page"** | Enhanced the hero section with dynamic gradient blobs, modern typography, and better shadow highlights.<br/>[`style: Improve landing page UI and hero section`](https://github.com/DeepSaha25/GovVault/commit/9b004b9) |
+| **"ui is genuinely good, if there dark mode section it would be more good."** / **"the dark mode is awesome make it default"** | Exposed the ThemeToggle and changed the default application theme to dark mode.<br/>[`feat: Set dark mode as default theme`](https://github.com/DeepSaha25/GovVault/commit/530a01b) |
+| **"Adding a sample proposal will help users understand the workflow imo"** | Injected a mock/sample proposal that renders when the on-chain list is empty to let new users preview the voting UI safely.<br/>[`feat: Add sample proposal to help users understand the workflow`](https://github.com/DeepSaha25/GovVault/commit/cacbb8a) |
 
 ---
 
