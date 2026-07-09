@@ -7,6 +7,7 @@ import { Toaster } from 'react-hot-toast';
 import { Analytics } from '@vercel/analytics/react';
 
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
+import WelcomeModal from '@/components/ui/WelcomeModal';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -38,6 +39,7 @@ export default function RootLayout({
           }}
         />
         <Analytics />
+        <WelcomeModal />
         </ThemeProvider>
       </body>
     </html>
