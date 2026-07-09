@@ -57,7 +57,7 @@ export default function WelcomeModal() {
             onClick={handleClose}
             className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors shadow-md hover:shadow-lg"
           >
-            I Understand, Let's Go!
+            I Understand, Let&apos;s Go!
           </button>
         </div>
       </div>
