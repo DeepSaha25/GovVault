@@ -40,9 +40,10 @@ export default function DashboardPage() {
   const [amount, setAmount] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  // Search and Filter State
+  // Search, Filter, and Sort State
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<'all' | 'active' | 'passed' | 'failed' | 'executed'>('all');
+  const [sort, setSort] = useState<'newest' | 'oldest' | 'most_votes'>('newest');
   const [showGuide, setShowGuide] = useState(true);
 
   // Voting Calculator State per Proposal
@@ -132,14 +133,19 @@ export default function DashboardPage() {
     }));
   };
 
-  // Filtered Proposals
-  const filteredProposals = proposals.filter((p) => {
+  // Filtered and Sorted Proposals
+  const filteredProposals = [...proposals].filter((p) => {
     const matchesSearch =
       p.title.toLowerCase().includes(search.toLowerCase()) ||
       p.description.toLowerCase().includes(search.toLowerCase()) ||
       p.id.toString() === search;
     const matchesFilter = filter === 'all' || p.status === filter;
     return matchesSearch && matchesFilter;
+  }).sort((a, b) => {
+    if (sort === 'newest') return b.createdAt - a.createdAt;
+    if (sort === 'oldest') return a.createdAt - b.createdAt;
+    if (sort === 'most_votes') return (b.yesVotes + b.noVotes) - (a.yesVotes + a.noVotes);
+    return 0;
   });
 
   let displayProposals = filteredProposals;
@@ -360,15 +366,26 @@ export default function DashboardPage() {
           <div className="lg:col-span-8 space-y-6">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <h2 className="text-lg font-bold text-black dark:text-white uppercase tracking-wider">Active Proposals</h2>
-              <div className="relative w-full md:w-64">
-                <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" />
-                <input
-                  className="w-full pl-9 pr-3 h-10 bg-white dark:bg-surface-800 border border-slate-200 dark:border-surface-700 rounded focus:border-black outline-none text-xs text-slate-700 dark:text-slate-200 placeholder:text-slate-400"
-                  placeholder="Search proposals..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  type="text"
-                />
+              <div className="flex flex-col md:flex-row gap-3 w-full md:w-auto">
+                <div className="relative w-full md:w-64">
+                  <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" />
+                  <input
+                    className="w-full pl-9 pr-3 h-10 bg-white dark:bg-surface-800 border border-slate-200 dark:border-surface-700 rounded focus:border-black outline-none text-xs text-slate-700 dark:text-slate-200 placeholder:text-slate-400"
+                    placeholder="Search proposals..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    type="text"
+                  />
+                </div>
+                <select
+                  value={sort}
+                  onChange={(e) => setSort(e.target.value as any)}
+                  className="h-10 bg-white dark:bg-surface-800 border border-slate-200 dark:border-surface-700 rounded px-3 text-xs text-slate-700 dark:text-slate-200 focus:border-black outline-none"
+                >
+                  <option value="newest">Sort by Newest</option>
+                  <option value="oldest">Sort by Oldest</option>
+                  <option value="most_votes">Sort by Most Votes</option>
+                </select>
               </div>
             </div>
 
