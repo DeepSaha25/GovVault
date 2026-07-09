@@ -135,9 +135,9 @@ Based on the community feedback collected, we have successfully onboarded 50+ te
 | **"Directly link transaction hashes to block explorers in success messages"** | Upgraded all success toasts (proposal submit, vote, evaluate, release) to display a dynamic, clickable direct link to Stellar Expert.<br/>[`refactor: rename useGovernor to tsx and add explorer links to success toasts`](https://github.com/DeepSaha25/GovVault/commit/fe9f19a) |
 | **"Save direct XLM transfer history"** | Polished the direct XLM transfer page to store and show the last 5 successful transfers inside browser local storage.<br/>[`feat: polish direct XLM transfer page and add local transfer history tracker`](https://github.com/DeepSaha25/GovVault/commit/3bf8ef7) |
 | **"Integrate GSAP and Three.js for a professional 3D visual theme"** | Embedded a fixed full-screen interactive 3D WebGL consensus particle network and GSAP stagger slide-in hero animations on the landing page.<br/>[`feat: make 3D particle constellation canvas full screen background`](https://github.com/DeepSaha25/GovVault/commit/75dba8a) and [`style: remove solid background from outer page container to make 3D particles canvas visible`](https://github.com/DeepSaha25/GovVault/commit/cf5b1d1) |
-| **"Optimize onboarding for new users"** | Built an interactive Welcome Onboarding Modal to explain the quadratic voting mechanism to first-time users. |
-| **"Improve dashboard UX for proposal lists"** | Added a new sorting and filtering mechanism to the dashboard to filter proposals by status (Active, Passed, etc.). |
-| **"Make the analytics page feel more complete"** | Added rich visual stats summary cards to the analytics page for better data visualization. |
+| **"Optimize onboarding for new users"** | Built an interactive Welcome Onboarding Modal to explain the quadratic voting mechanism to first-time users.<br/>[`feat: Add interactive WelcomeModal for onboarding`](https://github.com/DeepSaha25/GovVault/commit/afcef4e) |
+| **"Improve dashboard UX for proposal lists"** | Added a new sorting and filtering mechanism to the dashboard to filter proposals by status (Active, Passed, etc.).<br/>[`feat: Add proposal sorting mechanism to dashboard`](https://github.com/DeepSaha25/GovVault/commit/b96b24c) |
+| **"Make the analytics page feel more complete"** | Added rich visual stats summary cards to the analytics page for better data visualization.<br/>[`feat: Add rich visual stats cards to analytics dashboard`](https://github.com/DeepSaha25/GovVault/commit/507b118) |
 
 ---
 
