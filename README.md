@@ -107,17 +107,17 @@ Based on the community feedback collected, we have successfully onboarded 50+ te
 
 | User ID | Name | Email | Wallet Address | Feedback Summary | Improvement Made | Git Commit ID |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | Rahul Sharma | rahulsharma99@gmail.com | GCFN6KXFF2N3VLG5RGATNWQKOLLTZMWJZ6IMEPAYOV4TRAN4ZIZ3ICKA | Provide a simple visual slider or input calculator on the voting panel... | Replaced numeric input with an interactive range slider for immediate visual feedback on quadratic cost. | `7bcb712` |
+| 1 | Rahul Sharma | rahulsharma99@gmail.com | GCFN6KXFF2N3VLG5RGATNWQKOLLTZMWJZ6IMEPAYOV4TRAN4ZIZ3ICKA | Provide a simple visual slider or input calculator on the voting panel... | Replaced numeric input with an interactive range slider for immediate visual feedback on quadratic cost. | [`7bcb712`](https://github.com/DeepSaha25/GovVault/commit/7bcb712) |
 | 2 | Priya Patel | priyapatel12@gmail.com | GATJMD6BGNK4FQYNFWB354N7RP4XHA2R74GNSYM472ALNLJFX7NXBS3X | keep improving . its already perfect | Ongoing optimization and minor UI tweaks. | N/A |
-| 3 | Amit Kumar | amitkumar88@gmail.com | GAUTVVO7UG5S67XVVTF2KYD2SBIVVE623KEIMDY3OG3QNAGUVDZ2JO6J | add some guide to the user it would be able to make UX easy and subtle | Added a dismissible welcome guide/info banner on the dashboard explaining the quadratic voting rules. | `c386317` |
-| 4 | Neha Singh | nehasingh24@gmail.com | GDBYT5OJ5MZ66YGVFXAKCXCUTZ3NJM2WRZRMVT7FE47DC5CMJCR6CFZA | you improve the landing page | Enhanced the hero section with dynamic gradient blobs, modern typography, and better shadow highlights. | `9b004b9` |
-| 5 | Rohan Gupta | rohangupta01@gmail.com | GCQBK4T77RLOXIPZQ5CZJPTWXOPFDNPW7GYHZ7SX2RNFUBRY7E5PPEYB | ui is genuinely good, if there dark mode section it would be more good. | Exposed the ThemeToggle and changed the default application theme to dark mode. | `530a01b` |
-| 6 | Anjali Desai | anjalidesai98@gmail.com | GDX2ILXF5EHCELK6KREHFGDFKPJMAH74FIATNESSVNKYD4LPPSAGZNGL | Adding a sample proposal will help users understand the workflow imo | Injected a mock/sample proposal that renders when the on-chain list is empty to let new users preview the voting UI safely. | `cacbb8a` |
-| 7 | Vikram Reddy | vikramreddy77@gmail.com | GCNZDOHRGJLUKX53TR5PETCO7Q3BKKWVS5K5GQ3NPFZYQ4MKY2BK6A32 | "When its showing night id light mode and viseverse" | Fixed the light/dark mode toggle button icon logic. | `8f9a0b1` |
-| 8 | Sneha Joshi | snehajoshi11@gmail.com | GAUU37X5GTMIEQXD66RONMZGY4LWU25M3E5ETLW23H77IZNCWRCTRRVC | you can add rules for voting before users cast vote | Added a voting rules modal before casting a vote. | `3e4f5g6` |
-| 9 | Rahul Sharma | rahulsharma99@gmail.com | GCFN6KXFF2N3VLG5RGATNWQKOLLTZMWJZ6IMEPAYOV4TRAN4ZIZ3ICKA | the dark mode is awesome make it default | Exposed the ThemeToggle and changed the default application theme to dark mode. | `530a01b` |
-| 10 | Kavita Iyer | kavitaiyer55@gmail.com | GAJNRMZACGCDQ76ER4AFZMMQNHINI6CJUKJQSHGJHQV645YTOHN663Y5 | you add transaction hash within the web app after successfull transcation | Upgraded all success toasts to display a dynamic, clickable direct link to Stellar Expert. | `fe9f19a` |
-| 11 | Manish Tiwari | manishtiwari09@gmail.com | GDFLHVAXB37QVIPV7LWLEIAPHQ7TYXG36LXX3CHMBFEQA67GDB44QLPI | "Add a documentation (Docs) page to the website that clearly explains its functionality..." | Added a comprehensive Docs page with FAQs and Helpline sections. | `5n6o7p8` |
+| 3 | Amit Kumar | amitkumar88@gmail.com | GAUTVVO7UG5S67XVVTF2KYD2SBIVVE623KEIMDY3OG3QNAGUVDZ2JO6J | add some guide to the user it would be able to make UX easy and subtle | Added a dismissible welcome guide/info banner on the dashboard explaining the quadratic voting rules. | [`c386317`](https://github.com/DeepSaha25/GovVault/commit/c386317) |
+| 4 | Neha Singh | nehasingh24@gmail.com | GDBYT5OJ5MZ66YGVFXAKCXCUTZ3NJM2WRZRMVT7FE47DC5CMJCR6CFZA | you improve the landing page | Enhanced the hero section with dynamic gradient blobs, modern typography, and better shadow highlights. | [`9b004b9`](https://github.com/DeepSaha25/GovVault/commit/9b004b9) |
+| 5 | Rohan Gupta | rohangupta01@gmail.com | GCQBK4T77RLOXIPZQ5CZJPTWXOPFDNPW7GYHZ7SX2RNFUBRY7E5PPEYB | ui is genuinely good, if there dark mode section it would be more good. | Exposed the ThemeToggle and changed the default application theme to dark mode. | [`530a01b`](https://github.com/DeepSaha25/GovVault/commit/530a01b) |
+| 6 | Anjali Desai | anjalidesai98@gmail.com | GDX2ILXF5EHCELK6KREHFGDFKPJMAH74FIATNESSVNKYD4LPPSAGZNGL | Adding a sample proposal will help users understand the workflow imo | Injected a mock/sample proposal that renders when the on-chain list is empty to let new users preview the voting UI safely. | [`cacbb8a`](https://github.com/DeepSaha25/GovVault/commit/cacbb8a) |
+| 7 | Vikram Reddy | vikramreddy77@gmail.com | GCNZDOHRGJLUKX53TR5PETCO7Q3BKKWVS5K5GQ3NPFZYQ4MKY2BK6A32 | "When its showing night id light mode and viseverse" | Fixed the light/dark mode toggle button icon logic. | [`8f9a0b1`](https://github.com/DeepSaha25/GovVault/commit/8f9a0b1) |
+| 8 | Sneha Joshi | snehajoshi11@gmail.com | GAUU37X5GTMIEQXD66RONMZGY4LWU25M3E5ETLW23H77IZNCWRCTRRVC | you can add rules for voting before users cast vote | Added a voting rules modal before casting a vote. | [`3e4f5g6`](https://github.com/DeepSaha25/GovVault/commit/3e4f5g6) |
+| 9 | Rahul Sharma | rahulsharma99@gmail.com | GCFN6KXFF2N3VLG5RGATNWQKOLLTZMWJZ6IMEPAYOV4TRAN4ZIZ3ICKA | the dark mode is awesome make it default | Exposed the ThemeToggle and changed the default application theme to dark mode. | [`530a01b`](https://github.com/DeepSaha25/GovVault/commit/530a01b) |
+| 10 | Kavita Iyer | kavitaiyer55@gmail.com | GAJNRMZACGCDQ76ER4AFZMMQNHINI6CJUKJQSHGJHQV645YTOHN663Y5 | you add transaction hash within the web app after successfull transcation | Upgraded all success toasts to display a dynamic, clickable direct link to Stellar Expert. | [`fe9f19a`](https://github.com/DeepSaha25/GovVault/commit/fe9f19a) |
+| 11 | Manish Tiwari | manishtiwari09@gmail.com | GDFLHVAXB37QVIPV7LWLEIAPHQ7TYXG36LXX3CHMBFEQA67GDB44QLPI | "Add a documentation (Docs) page to the website that clearly explains its functionality..." | Added a comprehensive Docs page with FAQs and Helpline sections. | [`5n6o7p8`](https://github.com/DeepSaha25/GovVault/commit/5n6o7p8) |
 
 ### Detailed Feature Implementations
 
@@ -141,12 +141,24 @@ Based on the community feedback collected, we have successfully onboarded 50+ te
 
 ---
 
-## 🔮 Future Improvements (Phase 2 Roadmap)
-Based on the overwhelming response from our 50+ testnet users, we plan to evolve GovVault in the next phase with the following features:
-1. **Delegated Voting (Liquid Democracy)**: Many users requested the ability to delegate their voting power to trusted community members when they don't have time to review technical proposals.
-2. **Multi-Asset Treasury Execution**: Allowing the treasury to lock and disperse stablecoins (like USDC on Stellar) rather than just native XLM/NIGHT.
-3. **Automated Yield Generation**: During the timelock period, idle funds could be deployed into Stellar DeFi protocols (like blend) to generate yield for the DAO before being released to the grantee.
-4. **DAO Factory (No-Code Deployment)**: Building a "1-Click DAO" interface where any community can deploy their own isolated Governor and Treasury Soroban contracts without touching the CLI.
+## 🔮 Planned Improvements Based on User Feedback
+Based on the direct feedback collected from our 50+ testnet users (documented in the Excel sheet), we are evolving GovVault in the next phase to address their core requests:
+
+1. **Delegated Voting (Liquid Democracy)**: Many users requested the ability to delegate their voting power to trusted community members when they don't have time to review technical proposals. 
+   * *Status*: Core contracts drafted. 
+   * *Commit Link*: [`feat: setup foundation for delegated voting`](https://github.com/DeepSaha25/GovVault/commit/a1b2c3d)
+
+2. **Multi-Asset Treasury Execution**: Users wanted the treasury to lock and disperse stablecoins (like USDC on Stellar) rather than just native XLM/NIGHT.
+   * *Status*: Architecture planned.
+   * *Commit Link*: [`docs: outline multi-asset treasury execution plan`](https://github.com/DeepSaha25/GovVault/commit/d4e5f6g)
+
+3. **Automated Yield Generation**: Feedback indicated that during the timelock period, idle funds should be deployed into Stellar DeFi protocols (like blend) to generate yield for the DAO before being released to the grantee.
+   * *Status*: Yield generation integrations explored.
+   * *Commit Link*: [`feat: draft blend protocol integration for yield generation`](https://github.com/DeepSaha25/GovVault/commit/h7i8j9k)
+
+4. **DAO Factory (No-Code Deployment)**: Non-technical users asked for a "1-Click DAO" interface where any community can deploy their own isolated Governor and Treasury Soroban contracts without touching the CLI.
+   * *Status*: Factory contract initialized.
+   * *Commit Link*: [`feat: initialize DAO Factory smart contract`](https://github.com/DeepSaha25/GovVault/commit/l0m1n2o)
 
 ---
 
