@@ -123,11 +123,13 @@ impl GovernorContract {
             panic!("Voter already voted on this proposal");
         }
 
+        // Votes must be a positive integer; negative values would corrupt the tally
+        if votes <= 0 {
+            panic!("Votes must be a positive integer");
+        }
+
         // Quadratic cost: cost = votes * votes
         let cost = votes.checked_mul(votes).expect("Cost overflow");
-        if cost <= 0 {
-            panic!("Must vote with at least 1 vote");
-        }
 
         // Transfer voting token cost to the treasury contract
         let token_addr: Address = env.storage().instance().get(&DataKey::Token).unwrap();
