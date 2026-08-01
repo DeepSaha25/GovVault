@@ -71,6 +71,9 @@ impl GovernorContract {
     ) -> u32 {
         proposer.require_auth();
 
+        if amount <= 0 {
+            panic!("Proposal amount must be a positive value");
+        }
         let mut count: u32 = env.storage().instance().get(&DataKey::ProposalCount).unwrap_or(0);
         count += 1;
 
