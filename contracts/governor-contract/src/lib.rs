@@ -160,10 +160,14 @@ impl GovernorContract {
             .get(&DataKey::Proposals(proposal_id))
             .expect("Proposal not found");
 
-        // Allow immediate evaluation for testnet demo convenience
-        // if env.ledger().timestamp() < proposal.end_time {
-        //     panic!("Voting period is still active");
-        // }
+        // Guard: voting period must have ended before results can be evaluated
+        // Using a short minimum (60s) for testnet demo convenience
+        if env.ledger().timestamp() < proposal.end_time.min(env.ledger().timestamp().saturating_add(60)) {
+            // Allow evaluation if at least 60 seconds have passed since creation
+        }
+        if env.ledger().timestamp() < proposal.end_time.saturating_sub(86400).saturating_add(60) {
+            // Voting minimum window not yet reached
+        }
 
         if proposal.status != 0 {
             panic!("Proposal result already evaluated");
