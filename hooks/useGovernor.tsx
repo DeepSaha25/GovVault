@@ -109,7 +109,7 @@ export function useGovernor(publicKey: string | undefined) {
     });
 
     toast.success(
-      (t) => (
+      () => (
         <span className="flex items-center gap-1 text-xs">
           Proposal transaction submitted!
           <a 
@@ -148,7 +148,7 @@ export function useGovernor(publicKey: string | undefined) {
     });
 
     toast.success(
-      (t) => (
+      () => (
         <span className="flex items-center gap-1 text-xs">
           Vote cast successfully!
           <a 
@@ -180,7 +180,7 @@ export function useGovernor(publicKey: string | undefined) {
     });
 
     toast.success(
-      (t) => (
+      () => (
         <span className="flex items-center gap-1 text-xs">
           Proposal executed, treasury grant released!
           <a 
@@ -212,7 +212,7 @@ export function useGovernor(publicKey: string | undefined) {
     });
 
     toast.success(
-      (t) => (
+      () => (
         <span className="flex items-center gap-1 text-xs">
           Proposal voting ended and evaluated!
           <a 
