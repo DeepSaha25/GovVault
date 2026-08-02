@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { stellar } from '@/lib/stellar';
-import { GOVERNOR_CONTRACT_ID, TREASURY_CONTRACT_ID } from '@/lib/constants';
+import { GOVERNOR_CONTRACT_ID, TREASURY_CONTRACT_ID, XLM_SAC_CONTRACT_ID } from '@/lib/constants';
 import * as StellarSdk from '@stellar/stellar-sdk';
 import type { Proposal } from '@/lib/types';
 import { FiExternalLink } from 'react-icons/fi';
@@ -23,7 +23,7 @@ export function useGovernor(publicKey: string | undefined) {
         try {
           const balVal = await stellar.simulateRead({
             publicKey,
-            contractId: 'CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC',
+            contractId: XLM_SAC_CONTRACT_ID,
             method: 'balance',
             args: [StellarSdk.nativeToScVal(TREASURY_CONTRACT_ID, { type: 'address' })],
           });

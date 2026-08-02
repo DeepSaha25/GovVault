@@ -13,6 +13,12 @@ export const GOVERNOR_CONTRACT_ID =
 export const TREASURY_CONTRACT_ID =
   process.env.NEXT_PUBLIC_TREASURY_CONTRACT_ID || '';
 
+// Stellar Asset Contract (SAC) address for native XLM on testnet.
+// Source: https://developers.stellar.org/docs/tokens/stellar-asset-contract
+export const XLM_SAC_CONTRACT_ID =
+  process.env.NEXT_PUBLIC_XLM_SAC_CONTRACT_ID ||
+  'CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC';
+
 export const PROPOSAL_STATUS_COLORS: Record<string, { bg: string; text: string; dot: string }> = {
   active: { bg: 'bg-amber-100 border border-amber-250', text: 'text-amber-800', dot: 'bg-amber-600' },
   passed: { bg: 'bg-emerald-100 border border-emerald-250', text: 'text-emerald-800', dot: 'bg-emerald-600' },
