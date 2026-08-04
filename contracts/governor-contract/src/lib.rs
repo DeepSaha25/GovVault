@@ -22,6 +22,7 @@ pub enum DataKey {
     Treasury,
     Token,
     ProposalCount,
+    MinQuorum,
     Proposals(u32),
     Voted(u32, Address),
 }
@@ -52,13 +53,14 @@ mod treasury {
 
 #[contractimpl]
 impl GovernorContract {
-    pub fn initialize(env: Env, treasury: Address, token: Address) {
+    pub fn initialize(env: Env, treasury: Address, token: Address, min_quorum: i128) {
         if env.storage().instance().has(&DataKey::Treasury) {
             panic!("Already initialized");
         }
         env.storage().instance().set(&DataKey::Treasury, &treasury);
         env.storage().instance().set(&DataKey::Token, &token);
         env.storage().instance().set(&DataKey::ProposalCount, &0u32);
+        env.storage().instance().set(&DataKey::MinQuorum, &min_quorum);
     }
 
     pub fn create_proposal(
@@ -176,7 +178,13 @@ impl GovernorContract {
             panic!("Proposal result already evaluated");
         }
 
-        if proposal.yes_votes > proposal.no_votes {
+        // Quorum check: total participation must meet the minimum threshold
+        let min_quorum: i128 = env.storage().instance().get(&DataKey::MinQuorum).unwrap_or(0);
+        let total_votes = proposal.yes_votes + proposal.no_votes;
+
+        if total_votes < min_quorum {
+            proposal.status = 2; // Failed — quorum not reached
+        } else if proposal.yes_votes > proposal.no_votes {
             proposal.status = 1; // Passed & Timelocked
             proposal.execution_time = env.ledger().timestamp() + 60; // 1-minute timelock for testing/demo (originally 24 hours)
         } else {
