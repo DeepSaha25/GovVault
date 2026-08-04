@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { stellar } from '@/lib/stellar';
 
 export function useWallet() {
-  const [publicKey, setPublicKey] = useState('');
+  const [publicKey, setPublicKey] = useState<string | null>(null);
   const [walletId, setWalletId] = useState('freighter');
   const [balance, setBalance] = useState('0.00');
   const [loading, setLoading] = useState(false);
@@ -71,6 +71,6 @@ export function useWallet() {
     error,
     connect,
     disconnect,
-    refreshBalance: () => refreshBalance(publicKey),
+    refreshBalance: () => refreshBalance(publicKey ?? ''),
   };
 }
