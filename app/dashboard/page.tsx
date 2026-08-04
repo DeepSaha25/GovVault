@@ -8,6 +8,7 @@ import { useContractEvents } from '@/hooks/useContractEvents';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { ProposalCountdown } from '@/components/ui/ProposalCountdown';
+import { VoteDistributionBar } from '@/components/ui/VoteDistributionBar';
 import { stellar } from '@/lib/stellar';
 import { GOVERNOR_CONTRACT_ID, TREASURY_CONTRACT_ID } from '@/lib/constants';
 import {
@@ -459,29 +460,11 @@ export default function DashboardPage() {
                         <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{prop.description}</p>
 
                         {/* Vote Distribution Bar */}
-                        {(() => {
-                          const totalVotes = prop.yesVotes + prop.noVotes;
-                          const yesPercentage = totalVotes > 0 ? (prop.yesVotes / totalVotes) * 100 : 50;
-                          const noPercentage = totalVotes > 0 ? (prop.noVotes / totalVotes) * 100 : 50;
-                          return (
-                            <div className="space-y-1.5 pt-1">
-                              <div className="flex justify-between text-[9px] font-semibold uppercase tracking-wider text-slate-400">
-                                <span className="text-emerald-600 dark:text-emerald-400 font-bold">{prop.yesVotes} YES ({totalVotes > 0 ? yesPercentage.toFixed(0) : 0}%)</span>
-                                <span className="text-rose-600 dark:text-rose-400 font-bold">{prop.noVotes} NO ({totalVotes > 0 ? noPercentage.toFixed(0) : 0}%)</span>
-                              </div>
-                              <div className="w-full bg-slate-100 dark:bg-surface-700 rounded-full h-2 overflow-hidden flex border border-slate-200/50 dark:border-surface-700/50">
-                                {totalVotes === 0 ? (
-                                  <div className="w-full bg-slate-200 dark:bg-surface-700 h-full rounded-full" />
-                                ) : (
-                                  <>
-                                    <div className="bg-emerald-500 h-full transition-all duration-500" style={{ width: `${yesPercentage}%` }} />
-                                    <div className="bg-rose-500 h-full transition-all duration-500" style={{ width: `${noPercentage}%` }} />
-                                  </>
-                                )}
-                              </div>
-                            </div>
-                          );
-                        })()}
+                        <VoteDistributionBar
+                          yesVotes={prop.yesVotes}
+                          noVotes={prop.noVotes}
+                          className="pt-1"
+                        />
 
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                           <div>
