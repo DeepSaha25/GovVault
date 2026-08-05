@@ -189,6 +189,19 @@ export default function DashboardPage() {
     ])
   ).filter((addr) => addr && addr.length > 5).length;
 
+  // Derive which proposal IDs the current wallet has already voted on (from event log)
+  const votedProposalIds = new Set<number>(
+    events
+      .filter(
+        (e) =>
+          e.topic[0] === 'vote' &&
+          Array.isArray(e.value) &&
+          publicKey &&
+          String(e.value[0]).toLowerCase() === publicKey.toLowerCase()
+      )
+      .map((e) => Number(e.topic[1]))
+  );
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 space-y-8 animate-fade-in bg-[#fcf8fa] dark:bg-surface-900">
       {/* Header & Subtitle */}
@@ -446,6 +459,11 @@ export default function DashboardPage() {
                               #GV-{prop.id}
                             </span>
                             <Badge status={prop.status} />
+                            {votedProposalIds.has(prop.id) && (
+                              <span className="inline-flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50 px-2 py-0.5 rounded">
+                                <FiCheck className="h-2.5 w-2.5" /> You Voted
+                              </span>
+                            )}
                           </div>
                           {prop.status === 'active' && prop.endTime > 0 && (
                             <ProposalCountdown targetTime={prop.endTime} prefix="Ends In:" />
