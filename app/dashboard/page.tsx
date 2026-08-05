@@ -627,6 +627,59 @@ export default function DashboardPage() {
               </div>
             </div>
 
+            {/* Governance Health Stats Panel */}
+            <div className="border border-slate-200 dark:border-surface-700 bg-white dark:bg-surface-800 rounded p-4 space-y-3 shadow-sm">
+              <div className="flex justify-between items-center pb-2 border-b border-slate-100 dark:border-surface-750">
+                <span className="font-bold text-xs uppercase tracking-wider text-black dark:text-white">Governance Health</span>
+                <span className="text-[9px] bg-slate-100 dark:bg-surface-700 text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5 rounded border border-slate-200 dark:border-surface-600 uppercase">
+                  Live Stats
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800/30 rounded p-2.5 text-center">
+                  <p className="text-xl font-bold text-emerald-700 dark:text-emerald-400 font-sans">
+                    {proposals.filter((p) => p.status === 'passed' || p.status === 'executed').length}
+                  </p>
+                  <p className="text-[9px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-500 mt-0.5">Passed</p>
+                </div>
+                <div className="bg-rose-50 dark:bg-rose-900/20 border border-rose-100 dark:border-rose-800/30 rounded p-2.5 text-center">
+                  <p className="text-xl font-bold text-rose-600 dark:text-rose-400 font-sans">
+                    {proposals.filter((p) => p.status === 'failed').length}
+                  </p>
+                  <p className="text-[9px] font-bold uppercase tracking-wider text-rose-500 dark:text-rose-500 mt-0.5">Rejected</p>
+                </div>
+                <div className="bg-slate-50 dark:bg-surface-700 border border-slate-200 dark:border-surface-600 rounded p-2.5 text-center">
+                  <p className="text-xl font-bold text-black dark:text-white font-sans">
+                    {proposals.filter((p) => p.status === 'executed').length}
+                  </p>
+                  <p className="text-[9px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-0.5">Executed</p>
+                </div>
+                <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800/30 rounded p-2.5 text-center">
+                  <p className="text-xl font-bold text-amber-700 dark:text-amber-400 font-sans">
+                    {proposals.filter((p) => p.status === 'active').length}
+                  </p>
+                  <p className="text-[9px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-500 mt-0.5">Active</p>
+                </div>
+              </div>
+              <div className="pt-1 border-t border-slate-100 dark:border-surface-750 space-y-1.5">
+                <div className="flex justify-between items-center text-[10px]">
+                  <span className="text-slate-400 font-semibold uppercase tracking-wider">Total XLM Distributed</span>
+                  <span className="font-bold text-black dark:text-white font-mono">
+                    {proposals
+                      .filter((p) => p.status === 'executed')
+                      .reduce((sum, p) => sum + parseFloat(p.amount || '0'), 0)
+                      .toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} XLM
+                  </span>
+                </div>
+                <div className="flex justify-between items-center text-[10px]">
+                  <span className="text-slate-400 font-semibold uppercase tracking-wider">Total Proposals</span>
+                  <span className="font-bold text-black dark:text-white font-mono">
+                    {proposals.filter((p) => p.id !== 9999).length}
+                  </span>
+                </div>
+              </div>
+            </div>
+
             {/* Treasury Payout Queue */}
             <div className="border border-slate-200 dark:border-surface-700 bg-white dark:bg-surface-800 rounded overflow-hidden">
               <div className="p-4 border-b border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-800 flex justify-between items-center">
