@@ -240,6 +240,10 @@ impl GovernorContract {
     pub fn get_proposal_count(env: Env) -> u32 {
         env.storage().instance().get(&DataKey::ProposalCount).unwrap_or(0)
     }
+
+    pub fn get_min_quorum(env: Env) -> i128 {
+        env.storage().instance().get(&DataKey::MinQuorum).unwrap_or(0)
+    }
 }
 
 mod test;
