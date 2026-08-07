@@ -33,12 +33,6 @@ GovVault addresses these inefficiencies by leveraging Stellar's ultra-low fees a
 
 ## 🗓️ August Submission Updates
 
-> **Sprint Period:** August 1 – 7, 2026 &nbsp;|&nbsp; **13 commits** across 5 days &nbsp;|&nbsp; **6 bug fixes · 5 new features · 8 new tests · 1 docs update**
-
-After the project was approved, GovVault went through a thorough post-approval audit and enhancement sprint. Every change below was reviewed, implemented, and committed to the main branch.
-
----
-
 ### 🐛 Bug Fixes
 
 #### 1. Negative Vote Tally Corruption `fix` · Aug 1
