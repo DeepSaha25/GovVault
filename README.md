@@ -1,5 +1,7 @@
 # 🏛️ GovVault — DAO Governance with Quadratic Voting & Treasury Executor
 
+> **🛡️ Post-Approval Audit Complete** — GovVault completed a full security audit and feature enhancement sprint (Aug 1–7, 2026). See the [Changelog](#-post-approval-changelog--audit-report) below.
+
 GovVault is a decentralized governance and funding platform built on **Stellar Soroban**. It enforces a fair voting mechanism called **Quadratic Voting** to protect decentralized organizations from plutocratic (whale-dominated) outcomes and utilizes a **Timelocked Treasury Executor** to lock and safely release funding allocations on-chain.
 
 ---
@@ -205,3 +207,42 @@ GovVault is designed and built to address all technical requirements for product
 
 ## 📄 License
 This project is licensed under the MIT License.
+
+---
+
+## 🛡️ Post-Approval Changelog & Audit Report
+
+After project approval, GovVault underwent a comprehensive security audit and feature enhancement sprint from **August 1–7, 2026**. The following changes were implemented and committed:
+
+### 🔴 Security & Bug Fixes
+
+| Date | Commit | Severity | Description |
+|------|--------|----------|-------------|
+| Aug 1 | `fix: add positive vote validation` | 🟡 Medium | Prevented negative `votes` values from producing a positive quadratic cost while secretly decrementing the yes/no tally, corrupting governance results. |
+| Aug 1 | `fix: re-enable voting period guard` | 🟠 High | The voting deadline guard in `check_proposal_result` was commented out, allowing proposals to be evaluated before votes were cast. Re-enabled with a 60s testnet minimum. |
+| Aug 1 | `fix: add amount > 0 validation` | 🟢 Low | Prevented proposals with zero or negative treasury amounts from being created and later executed. |
+| Aug 2 | `fix: move hardcoded XLM SAC address to constants` | 🟡 Medium | Removed a magic string buried inside a React hook. The XLM Stellar Asset Contract address is now in `constants.ts` as `XLM_SAC_CONTRACT_ID` and overridable via `.env`. |
+| Aug 2 | `fix: remove unused toast callback argument t` | 🟢 Low | Cleaned up 4 unused `t` parameters in toast callbacks across `useGovernor.tsx`. |
+| Aug 4 | `fix: publicKey init from "" to null in useWallet` | 🟡 Medium | Corrected type-safety issue where `publicKey` was initialized as an empty string instead of `null`, breaking TypeScript expectations for consumers. |
+
+### 🟢 New Features
+
+| Date | Commit | Feature |
+|------|--------|---------|
+| Aug 4 | `feat: add min_quorum to governor contract` | Configurable minimum participation threshold. Proposals now fail if total votes (yes + no) don't meet the `min_quorum` set at initialization. Includes new `get_min_quorum()` getter. |
+| Aug 4 | `feat: add VoteDistributionBar component` | New reusable `VoteDistributionBar` component with animated yes/no progress bars and total vote count. Dashboard cards now use the component instead of an inline IIFE. |
+| Aug 5 | `feat: add Governance Health Stats panel` | New sidebar panel on the dashboard showing Passed/Failed/Executed/Active proposal counts, Total XLM Distributed, and Total Proposals at a glance. |
+| Aug 5 | `feat: add voter status badge` | Connected wallets now see a green **"✓ You Voted"** badge on proposal cards where their address appears in the event log, preventing duplicate-vote confusion. |
+| Aug 5 | `feat: add XLM_SAC_CONTRACT_ID to env + get_min_quorum getter` | Documents the SAC address in `.env.local` for overriding on mainnet. Adds `get_min_quorum()` to the Governor contract for frontend querying. |
+
+### 🧪 Test Coverage
+
+| Date | Commit | Description |
+|------|--------|-------------|
+| Aug 7 | `test: expand Vitest suite` | Added **8 new unit tests** covering: `formatAddress` with custom lengths, `stroopsToXlm` edge cases (zero, 1 stroop), `xlmToStroops` (integer, zero), `getExplorerLink` for contracts, quadratic voting math, the negative-vote bug documentation, and `PROPOSAL_STATUS_LABELS/COLORS` coverage. |
+
+### 📚 Documentation
+
+| Date | Commit | Description |
+|------|--------|-------------|
+| Aug 7 | `docs: update README` | This changelog. Added post-approval audit badge to README header and documented all security findings, feature additions, and test expansions. |
