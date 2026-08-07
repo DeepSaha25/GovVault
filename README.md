@@ -202,7 +202,7 @@ The existing test file had 4 basic tests. **8 new edge-case tests** were added:
 
 ---
 
-## 📋 Level 5 Submission Checklist & Proofs
+## 📋 Submission Checklist & Proofs
 
 ### 1. Proof of 50+ User Wallet Interactions
 The project has been successfully shared with community testers. All interactive testing, including proposal creation and quadratic voting, has been captured.
