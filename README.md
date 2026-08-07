@@ -1,7 +1,5 @@
 # 🏛️ GovVault — DAO Governance with Quadratic Voting & Treasury Executor
 
-> **🗓️ August Submission Updates** — GovVault completed a full post-approval security audit and feature sprint across **Aug 1–7, 2026**. [Jump to updates ↓](#-august-submission-updates)
-
 GovVault is a decentralized governance and funding platform built on **Stellar Soroban**. It enforces a fair voting mechanism called **Quadratic Voting** to protect decentralized organizations from plutocratic (whale-dominated) outcomes and utilizes a **Timelocked Treasury Executor** to lock and safely release funding allocations on-chain.
 
 ---
