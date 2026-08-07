@@ -1,6 +1,6 @@
 # 🏛️ GovVault — DAO Governance with Quadratic Voting & Treasury Executor
 
-> **🛡️ Post-Approval Audit Complete** — GovVault completed a full security audit and feature enhancement sprint (Aug 1–7, 2026). See the [Changelog](#-post-approval-changelog--audit-report) below.
+> **🗓️ August Submission Updates** — GovVault completed a full post-approval security audit and feature sprint across **Aug 1–7, 2026**. [Jump to updates ↓](#-august-submission-updates)
 
 GovVault is a decentralized governance and funding platform built on **Stellar Soroban**. It enforces a fair voting mechanism called **Quadratic Voting** to protect decentralized organizations from plutocratic (whale-dominated) outcomes and utilizes a **Timelocked Treasury Executor** to lock and safely release funding allocations on-chain.
 
@@ -14,10 +14,10 @@ Traditional decentralized autonomous organization (DAO) governance and treasury 
 - **High Fees for Decentralized Action**: Executing complex governance rules and multiple token voting options on L1 blockchains can cost users massive gas fees, discouraging participation.
 
 ### 🟢 The Solution
-GovVault addresses these inefficiencies by leveraging Stellar’s ultra-low fees and Soroban’s smart contract interoperability:
+GovVault addresses these inefficiencies by leveraging Stellar's ultra-low fees and Soroban's smart contract interoperability:
 - **On-Chain Quadratic Voting**: Governs with a cost scale of $cost = \text{votes}^2$ (e.g., 1 vote costs 1 token, 5 votes cost 25 tokens). This curbs whale dominance by making concentrated votes exponentially expensive, balancing power towards broad community consensus.
 - **Timelocked Treasury Executor (ICC)**: Implements split-contract security. Upon proposal approval, the Governor contract calls the Treasury contract via Inter-Contract Communication (ICC) to timelock the funds. This delay provides a critical security buffer for the community to inspect, veto, or freeze the allocation if a malicious takeover is detected.
-- **Frictionless Governance**: Capitalizes on Stellar’s speed and near-zero transaction fees to enable active, low-cost community-driven decision-making and micro-grant funding at scale.
+- **Frictionless Governance**: Capitalizes on Stellar's speed and near-zero transaction fees to enable active, low-cost community-driven decision-making and micro-grant funding at scale.
 
 
 ## 📌 Submission Details & Demo Presentation
@@ -28,6 +28,171 @@ GovVault addresses these inefficiencies by leveraging Stellar’s ultra-low fees
 *   **💻 GitHub Repository**: [https://github.com/DeepSaha25/GovVault](https://github.com/DeepSaha25/GovVault)
 *   **📝 User Feedback Google Form**: [Google Form Link](https://forms.gle/szCCY7ViGC1eUPvk6)
 *   **📊 Feedback Responses Sheet**: [Google Sheets Link](https://docs.google.com/spreadsheets/d/1W_oIGthkg8EkqsCX758ay9_VsvqLAABp1c-annNyhSg/edit?usp=sharing)
+
+---
+
+## 🗓️ August Submission Updates
+
+> **Sprint Period:** August 1 – 7, 2026 &nbsp;|&nbsp; **13 commits** across 5 days &nbsp;|&nbsp; **6 bug fixes · 5 new features · 8 new tests · 1 docs update**
+
+After the project was approved, GovVault went through a thorough post-approval audit and enhancement sprint. Every change below was reviewed, implemented, and committed to the main branch.
+
+---
+
+### 🐛 Bug Fixes
+
+#### 1. Negative Vote Tally Corruption `fix` · Aug 1
+**File:** `contracts/governor-contract/src/lib.rs`
+
+The contract's quadratic cost formula (`cost = votes × votes`) would silently accept negative values. A negative `votes` input produces a positive quadratic cost — so the token deduction looks valid — but the `yes_votes`/`no_votes` fields would be **decremented** instead of incremented, permanently corrupting the proposal tally.
+
+**Fix:** Added an explicit `if votes <= 0 { panic!(...) }` guard before the cost calculation. Votes must be a positive integer.
+
+---
+
+#### 2. Voting Period Guard Commented Out `fix` · Aug 1
+**File:** `contracts/governor-contract/src/lib.rs`
+
+The deadline check in `check_proposal_result` was commented out (`// if timestamp < end_time { panic! }`), meaning anyone could evaluate a proposal the moment it was created — before a single vote was cast. This is a logic bypass that could be used to sabotage proposals.
+
+**Fix:** Re-enabled the voting period guard. A minimum 60-second window is kept for testnet demo convenience.
+
+---
+
+#### 3. Zero / Negative Proposal Amount `fix` · Aug 1
+**File:** `contracts/governor-contract/src/lib.rs`
+
+`create_proposal` had no validation on the `amount` parameter. A proposal with `amount = 0` or `amount < 0` could be created, voted on, and executed — triggering a treasury transfer of zero or negative tokens.
+
+**Fix:** Added `if amount <= 0 { panic!("Proposal amount must be a positive value") }` at the top of `create_proposal`.
+
+---
+
+#### 4. Hardcoded XLM SAC Address in Hook `fix` · Aug 2
+**Files:** `hooks/useGovernor.tsx`, `lib/constants.ts`
+
+The Stellar Asset Contract (SAC) address for native XLM was hardcoded as a magic string directly inside a React hook. This creates a hidden maintenance risk — if the address changes for a mainnet deployment, it would silently fail with no obvious place to update it.
+
+**Fix:** Moved to `lib/constants.ts` as `XLM_SAC_CONTRACT_ID`, overridable via `NEXT_PUBLIC_XLM_SAC_CONTRACT_ID` in `.env`. The hook now imports the constant.
+
+---
+
+#### 5. Unused Toast Callback Argument `fix` · Aug 2
+**File:** `hooks/useGovernor.tsx`
+
+All four `toast.success()` calls used the form `(t) => (<JSX>)` but the `t` parameter (used for manual toast dismissal) was never used in any of them — generating lint warnings and dead code.
+
+**Fix:** Replaced all four `(t) =>` with `() =>`.
+
+---
+
+#### 6. `publicKey` Initialized as Empty String `fix` · Aug 4
+**File:** `hooks/useWallet.ts`
+
+`useState('')` was used for `publicKey`, meaning its TypeScript type was `string` — not `string | null`. Any downstream consumer that correctly typed the prop as `string | null` would get a type mismatch at compile time.
+
+**Fix:** Changed to `useState<string | null>(null)` and updated `refreshBalance` to use `publicKey ?? ''` safely.
+
+---
+
+### ✨ New Features
+
+#### 7. Configurable Minimum Quorum `feat` · Aug 4
+**File:** `contracts/governor-contract/src/lib.rs`
+
+A proposal with 1 yes vote and 0 no votes would automatically pass — even in a DAO with thousands of members. There was no minimum participation threshold.
+
+**What was built:**
+- Added `MinQuorum` key to the `DataKey` enum
+- Added `min_quorum: i128` parameter to `initialize()`
+- Enforced in `check_proposal_result`: if `yes_votes + no_votes < min_quorum`, the proposal is automatically marked **Failed**
+- Added a public `get_min_quorum()` getter for frontend querying
+
+---
+
+#### 8. Vote Distribution Progress Bar `feat` · Aug 4
+**Files:** `components/ui/VoteDistributionBar.tsx`, `app/dashboard/page.tsx`
+
+Users requested a visual representation of the yes/no vote split on proposal cards (directly noted in the README from the 50+ tester feedback).
+
+**What was built:**
+- New reusable `VoteDistributionBar` component with animated dual-color progress bar (green = yes, red = no), percentage labels, and total vote count
+- Replaced the inline IIFE vote bar on dashboard proposal cards with the new component
+
+---
+
+#### 9. Governance Health Stats Panel `feat` · Aug 5
+**File:** `app/dashboard/page.tsx`
+
+The dashboard sidebar only showed the treasury contract balance. There was no quick overview of DAO governance activity.
+
+**What was built:** A new **"Governance Health"** panel in the right sidebar with a 2×2 stat grid showing:
+- ✅ **Passed** proposals count
+- ❌ **Rejected** proposals count
+- ⚙️ **Executed** proposals count
+- 🟡 **Active** proposals count
+- Total **XLM Distributed** to grantees
+- Total **Proposals** ever created
+
+---
+
+#### 10. "You Voted" Status Badge `feat` · Aug 5
+**File:** `app/dashboard/page.tsx`
+
+When a wallet is connected, users had no way to tell at a glance whether they had already voted on a specific proposal, making it easy to attempt a duplicate vote (which would fail on-chain with a confusing error).
+
+**What was built:** A green **"✓ You Voted"** badge that appears on proposal cards when the connected wallet's address is found in the contract event log for that proposal. Derived client-side from `useContractEvents` — no extra RPC calls needed.
+
+---
+
+#### 11. `XLM_SAC_CONTRACT_ID` Documented in `.env` `feat` · Aug 5
+**Files:** `.env.local`, `contracts/governor-contract/src/lib.rs`
+
+Companion to commit #4 — added the `NEXT_PUBLIC_XLM_SAC_CONTRACT_ID` variable to `.env.local` with a clear comment explaining it can be overridden for mainnet. Also added the `get_min_quorum()` public getter to the Governor contract.
+
+---
+
+### 🧪 Test Additions
+
+#### 12. Expanded Vitest Test Suite `test` · Aug 7
+**File:** `__tests__/lib/stellar.test.ts`
+
+The existing test file had 4 basic tests. **8 new edge-case tests** were added:
+
+| Test | What It Covers |
+|------|---------------|
+| `formatAddress` with custom lengths | `stellar.formatAddress(addr, 6, 6)` truncation |
+| `formatAddress` exact-length passthrough | Address shorter than `start + end` is returned as-is |
+| `getExplorerLink` for contracts | `/contract/` type in explorer URL |
+| `stroopsToXlm` zero input | `0` stroops → `"0.0000000"` |
+| `stroopsToXlm` 1 stroop precision | `1` stroop → `"0.0000001"` |
+| `xlmToStroops` integer XLM | `"100"` → `"1000000000"` |
+| `xlmToStroops` zero | `"0"` → `"0"` |
+| Quadratic voting math | `1→1, 3→9, 5→25, 10→100` plus the negative-vote bug explanation |
+| `PROPOSAL_STATUS_LABELS` coverage | All 4 statuses have correct label strings |
+| `PROPOSAL_STATUS_COLORS` coverage | All 4 statuses have `bg`, `text`, `dot` tokens |
+
+---
+
+### 📊 Commit Timeline
+
+| Date | # | Type | Commit Message |
+|------|---|------|---------------|
+| Aug 1 | 1 | `fix` | add positive vote validation to prevent negative vote tally corruption |
+| Aug 1 | 2 | `fix` | re-enable voting period guard in check_proposal_result |
+| Aug 1 | 3 | `fix` | add amount > 0 validation in create_proposal |
+| Aug 2 | 4 | `fix` | move hardcoded XLM SAC address to constants |
+| Aug 2 | 5 | `fix` | remove unused toast callback argument t across useGovernor |
+| Aug 4 | 6 | `fix` | change publicKey initial state from empty string to null in useWallet |
+| Aug 4 | 7 | `feat` | add min_quorum parameter to governor initialize and check_proposal_result |
+| Aug 4 | 8 | `feat` | add vote distribution progress bar to proposal cards |
+| Aug 5 | 9 | `feat` | add treasury stats overview panel to dashboard |
+| Aug 5 | 10 | `feat` | add voter status badge showing if connected wallet has already voted |
+| Aug 5 | 11 | `feat` | add XLM_SAC_CONTRACT_ID to env and get_min_quorum getter to governor contract |
+| Aug 7 | 12 | `test` | expand Vitest suite with 8 new edge-case unit tests |
+| Aug 7 | 13 | `docs` | update README with audit findings, new features, and post-approval changelog |
+
+kqsCX758ay9_VsvqLAABp1c-annNyhSg/edit?usp=sharing)
 
 ---
 
