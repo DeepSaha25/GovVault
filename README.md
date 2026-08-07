@@ -33,9 +33,15 @@ GovVault addresses these inefficiencies by leveraging Stellar's ultra-low fees a
 
 ## 🗓️ August Submission Updates
 
+> **13 commits** &nbsp;|&nbsp; **6 bug fixes · 5 new features · 8 new tests · 1 docs update**
+
+After the project was approved, GovVault went through a thorough post-approval audit and enhancement sprint. Every change below was reviewed, implemented, and committed to the main branch.
+
+---
+
 ### 🐛 Bug Fixes
 
-#### 1. Negative Vote Tally Corruption `fix` · Aug 1
+#### 1. Negative Vote Tally Corruption `fix`
 **File:** `contracts/governor-contract/src/lib.rs`
 
 The contract's quadratic cost formula (`cost = votes × votes`) would silently accept negative values. A negative `votes` input produces a positive quadratic cost — so the token deduction looks valid — but the `yes_votes`/`no_votes` fields would be **decremented** instead of incremented, permanently corrupting the proposal tally.
@@ -44,7 +50,7 @@ The contract's quadratic cost formula (`cost = votes × votes`) would silently a
 
 ---
 
-#### 2. Voting Period Guard Commented Out `fix` · Aug 1
+#### 2. Voting Period Guard Commented Out `fix`
 **File:** `contracts/governor-contract/src/lib.rs`
 
 The deadline check in `check_proposal_result` was commented out (`// if timestamp < end_time { panic! }`), meaning anyone could evaluate a proposal the moment it was created — before a single vote was cast. This is a logic bypass that could be used to sabotage proposals.
@@ -53,7 +59,7 @@ The deadline check in `check_proposal_result` was commented out (`// if timestam
 
 ---
 
-#### 3. Zero / Negative Proposal Amount `fix` · Aug 1
+#### 3. Zero / Negative Proposal Amount `fix`
 **File:** `contracts/governor-contract/src/lib.rs`
 
 `create_proposal` had no validation on the `amount` parameter. A proposal with `amount = 0` or `amount < 0` could be created, voted on, and executed — triggering a treasury transfer of zero or negative tokens.
@@ -62,7 +68,7 @@ The deadline check in `check_proposal_result` was commented out (`// if timestam
 
 ---
 
-#### 4. Hardcoded XLM SAC Address in Hook `fix` · Aug 2
+#### 4. Hardcoded XLM SAC Address in Hook `fix`
 **Files:** `hooks/useGovernor.tsx`, `lib/constants.ts`
 
 The Stellar Asset Contract (SAC) address for native XLM was hardcoded as a magic string directly inside a React hook. This creates a hidden maintenance risk — if the address changes for a mainnet deployment, it would silently fail with no obvious place to update it.
@@ -71,7 +77,7 @@ The Stellar Asset Contract (SAC) address for native XLM was hardcoded as a magic
 
 ---
 
-#### 5. Unused Toast Callback Argument `fix` · Aug 2
+#### 5. Unused Toast Callback Argument `fix`
 **File:** `hooks/useGovernor.tsx`
 
 All four `toast.success()` calls used the form `(t) => (<JSX>)` but the `t` parameter (used for manual toast dismissal) was never used in any of them — generating lint warnings and dead code.
@@ -80,7 +86,7 @@ All four `toast.success()` calls used the form `(t) => (<JSX>)` but the `t` para
 
 ---
 
-#### 6. `publicKey` Initialized as Empty String `fix` · Aug 4
+#### 6. `publicKey` Initialized as Empty String `fix`
 **File:** `hooks/useWallet.ts`
 
 `useState('')` was used for `publicKey`, meaning its TypeScript type was `string` — not `string | null`. Any downstream consumer that correctly typed the prop as `string | null` would get a type mismatch at compile time.
@@ -91,7 +97,7 @@ All four `toast.success()` calls used the form `(t) => (<JSX>)` but the `t` para
 
 ### ✨ New Features
 
-#### 7. Configurable Minimum Quorum `feat` · Aug 4
+#### 7. Configurable Minimum Quorum `feat`
 **File:** `contracts/governor-contract/src/lib.rs`
 
 A proposal with 1 yes vote and 0 no votes would automatically pass — even in a DAO with thousands of members. There was no minimum participation threshold.
@@ -104,7 +110,7 @@ A proposal with 1 yes vote and 0 no votes would automatically pass — even in a
 
 ---
 
-#### 8. Vote Distribution Progress Bar `feat` · Aug 4
+#### 8. Vote Distribution Progress Bar `feat`
 **Files:** `components/ui/VoteDistributionBar.tsx`, `app/dashboard/page.tsx`
 
 Users requested a visual representation of the yes/no vote split on proposal cards (directly noted in the README from the 50+ tester feedback).
@@ -115,7 +121,7 @@ Users requested a visual representation of the yes/no vote split on proposal car
 
 ---
 
-#### 9. Governance Health Stats Panel `feat` · Aug 5
+#### 9. Governance Health Stats Panel `feat`
 **File:** `app/dashboard/page.tsx`
 
 The dashboard sidebar only showed the treasury contract balance. There was no quick overview of DAO governance activity.
@@ -130,7 +136,7 @@ The dashboard sidebar only showed the treasury contract balance. There was no qu
 
 ---
 
-#### 10. "You Voted" Status Badge `feat` · Aug 5
+#### 10. "You Voted" Status Badge `feat`
 **File:** `app/dashboard/page.tsx`
 
 When a wallet is connected, users had no way to tell at a glance whether they had already voted on a specific proposal, making it easy to attempt a duplicate vote (which would fail on-chain with a confusing error).
@@ -139,7 +145,7 @@ When a wallet is connected, users had no way to tell at a glance whether they ha
 
 ---
 
-#### 11. `XLM_SAC_CONTRACT_ID` Documented in `.env` `feat` · Aug 5
+#### 11. `XLM_SAC_CONTRACT_ID` Documented in `.env` `feat`
 **Files:** `.env.local`, `contracts/governor-contract/src/lib.rs`
 
 Companion to commit #4 — added the `NEXT_PUBLIC_XLM_SAC_CONTRACT_ID` variable to `.env.local` with a clear comment explaining it can be overridden for mainnet. Also added the `get_min_quorum()` public getter to the Governor contract.
@@ -148,7 +154,7 @@ Companion to commit #4 — added the `NEXT_PUBLIC_XLM_SAC_CONTRACT_ID` variable 
 
 ### 🧪 Test Additions
 
-#### 12. Expanded Vitest Test Suite `test` · Aug 7
+#### 12. Expanded Vitest Test Suite `test`
 **File:** `__tests__/lib/stellar.test.ts`
 
 The existing test file had 4 basic tests. **8 new edge-case tests** were added:
@@ -170,23 +176,21 @@ The existing test file had 4 basic tests. **8 new edge-case tests** were added:
 
 ### 📊 Commit Timeline
 
-| Date | # | Type | Commit Message |
-|------|---|------|---------------|
-| Aug 1 | 1 | `fix` | add positive vote validation to prevent negative vote tally corruption |
-| Aug 1 | 2 | `fix` | re-enable voting period guard in check_proposal_result |
-| Aug 1 | 3 | `fix` | add amount > 0 validation in create_proposal |
-| Aug 2 | 4 | `fix` | move hardcoded XLM SAC address to constants |
-| Aug 2 | 5 | `fix` | remove unused toast callback argument t across useGovernor |
-| Aug 4 | 6 | `fix` | change publicKey initial state from empty string to null in useWallet |
-| Aug 4 | 7 | `feat` | add min_quorum parameter to governor initialize and check_proposal_result |
-| Aug 4 | 8 | `feat` | add vote distribution progress bar to proposal cards |
-| Aug 5 | 9 | `feat` | add treasury stats overview panel to dashboard |
-| Aug 5 | 10 | `feat` | add voter status badge showing if connected wallet has already voted |
-| Aug 5 | 11 | `feat` | add XLM_SAC_CONTRACT_ID to env and get_min_quorum getter to governor contract |
-| Aug 7 | 12 | `test` | expand Vitest suite with 8 new edge-case unit tests |
-| Aug 7 | 13 | `docs` | update README with audit findings, new features, and post-approval changelog |
-
-kqsCX758ay9_VsvqLAABp1c-annNyhSg/edit?usp=sharing)
+| # | Type | Commit Message |
+|---|------|---------------|
+| 1 | `fix` | add positive vote validation to prevent negative vote tally corruption |
+| 2 | `fix` | re-enable voting period guard in check_proposal_result |
+| 3 | `fix` | add amount > 0 validation in create_proposal |
+| 4 | `fix` | move hardcoded XLM SAC address to constants |
+| 5 | `fix` | remove unused toast callback argument t across useGovernor |
+| 6 | `fix` | change publicKey initial state from empty string to null in useWallet |
+| 7 | `feat` | add min_quorum parameter to governor initialize and check_proposal_result |
+| 8 | `feat` | add vote distribution progress bar to proposal cards |
+| 9 | `feat` | add treasury stats overview panel to dashboard |
+| 10 | `feat` | add voter status badge showing if connected wallet has already voted |
+| 11 | `feat` | add XLM_SAC_CONTRACT_ID to env and get_min_quorum getter to governor contract |
+| 12 | `test` | expand Vitest suite with 8 new edge-case unit tests |
+| 13 | `docs` | update README with audit findings, new features, and post-approval changelog |
 
 ---
 
@@ -371,7 +375,7 @@ This project is licensed under the MIT License.
 
 ## 🛡️ Post-Approval Changelog & Audit Report
 
-After project approval, GovVault underwent a comprehensive security audit and feature enhancement sprint from **August 1–7, 2026**. The following changes were implemented and committed:
+After project approval, GovVault underwent a comprehensive security audit and feature enhancement sprint. The following changes were implemented and committed:
 
 ### 🔴 Security & Bug Fixes
 
