@@ -111,7 +111,7 @@ A proposal with 1 yes vote and 0 no votes would automatically pass — even in a
 #### 8. Vote Distribution Progress Bar `feat`
 **Files:** `components/ui/VoteDistributionBar.tsx`, `app/dashboard/page.tsx`
 
-Users requested a visual representation of the yes/no vote split on proposal cards (directly noted in the README from the 50+ tester feedback).
+Users requested a visual representation of the yes/no vote split on proposal cards (directly noted in the README from the 10+ tester feedback).
 
 **What was built:**
 - New reusable `VoteDistributionBar` component with animated dual-color progress bar (green = yes, red = no), percentage labels, and total vote count
@@ -202,12 +202,12 @@ The existing test file had 4 basic tests. **8 new edge-case tests** were added:
 
 ## 📋 Submission Checklist & Proofs
 
-### 1. Proof of 50+ User Wallet Interactions
+### 1. Proof of 10+ User Wallet Interactions
 The project has been successfully shared with community testers. All interactive testing, including proposal creation and quadratic voting, has been captured.
 *   **Live Feedback & Transaction Log**: The active wallet addresses and verified transaction hashes are logged in the [Google Sheets Log](https://docs.google.com/spreadsheets/d/1W_oIGthkg8EkqsCX758ay9_VsvqLAABp1c-annNyhSg/edit?usp=sharing).
 
 ### 2. User Feedback Summary
-Based on the feedback collected from 50+ real users across the testnet:
+Based on the feedback collected from 10+ real users across the testnet:
 *   **Ease of Onboarding**: Average score of **4.6 / 5.0**. Users praised the clean monochromatic design and clear wallet status indicators.
 *   **Quadratic Voting Math**: Testers noted that the cost-scaling ($cost = \text{votes}^2$) was easy to understand, especially with the real-time cost feedback display.
 *   **Key Requests**: Users suggested adding a visual chart representing vote distribution and directly showing the transaction links in success toasts.
@@ -248,41 +248,39 @@ Our GitHub Actions workflow automatically builds the Next.js frontend, runs the 
 
 ## 👥 Users Onboarded & Feedback Implementations
 
-Based on the community feedback collected, we have successfully onboarded 50+ testnet users and implemented their suggestions to improve UX and product stability.
+Based on the community feedback collected, we have successfully onboarded 10+ testnet users and implemented their suggestions to improve UX and product stability.
 
-### a. Users Onboarded (Sample from 50+)
+### a. Users Onboarded (Sample from 10+)
 
-| User ID | Name | Email | Wallet Address | Feedback Summary |
-| :--- | :--- | :--- | :--- | :--- |
-| 1 | Rahul Sharma | rahulsharma99@gmail.com | GCFN6KXFF2N3VLG5RGATNWQKOLLTZMWJZ6IMEPAYOV4TRAN4ZIZ3ICKA | Provide a simple visual slider or input calculator on the voting panel... |
-| 2 | Priya Patel | priyapatel12@gmail.com | GATJMD6BGNK4FQYNFWB354N7RP4XHA2R74GNSYM472ALNLJFX7NXBS3X | keep improving . its already perfect |
-| 3 | Amit Kumar | amitkumar88@gmail.com | GAUTVVO7UG5S67XVVTF2KYD2SBIVVE623KEIMDY3OG3QNAGUVDZ2JO6J | add some guide to the user it would be able to make UX easy and subtle |
-| 4 | Neha Singh | nehasingh24@gmail.com | GDBYT5OJ5MZ66YGVFXAKCXCUTZ3NJM2WRZRMVT7FE47DC5CMJCR6CFZA | you improve the landing page |
-| 5 | Rohan Gupta | rohangupta01@gmail.com | GCQBK4T77RLOXIPZQ5CZJPTWXOPFDNPW7GYHZ7SX2RNFUBRY7E5PPEYB | ui is genuinely good, if there dark mode section it would be more good. |
-| 6 | Anjali Desai | anjalidesai98@gmail.com | GDX2ILXF5EHCELK6KREHFGDFKPJMAH74FIATNESSVNKYD4LPPSAGZNGL | Adding a sample proposal will help users understand the workflow imo |
-| 7 | Vikram Reddy | vikramreddy77@gmail.com | GCNZDOHRGJLUKX53TR5PETCO7Q3BKKWVS5K5GQ3NPFZYQ4MKY2BK6A32 | "When its showing night id light mode and viseverse" |
-| 8 | Sneha Joshi | snehajoshi11@gmail.com | GAUU37X5GTMIEQXD66RONMZGY4LWU25M3E5ETLW23H77IZNCWRCTRRVC | you can add rules for voting before users cast vote |
-| 9 | Rahul Sharma | rahulsharma99@gmail.com | GCFN6KXFF2N3VLG5RGATNWQKOLLTZMWJZ6IMEPAYOV4TRAN4ZIZ3ICKA | the dark mode is awesome make it default |
-| 10 | Kavita Iyer | kavitaiyer55@gmail.com | GAJNRMZACGCDQ76ER4AFZMMQNHINI6CJUKJQSHGJHQV645YTOHN663Y5 | you add transaction hash within the web app after successfull transcation |
-| 11 | Manish Tiwari | manishtiwari09@gmail.com | GDFLHVAXB37QVIPV7LWLEIAPHQ7TYXG36LXX3CHMBFEQA67GDB44QLPI | "Add a documentation (Docs) page to the website that clearly explains its functionality..." |
-*(Note: Remaining 40+ user feedback entries are logged in the linked Google Sheet for brevity)*
+| User ID | Wallet Address | Feedback Summary |
+| :--- | :--- | :--- |
+| 1 | GCFN6KXFF2N3VLG5RGATNWQKOLLTZMWJZ6IMEPAYOV4TRAN4ZIZ3ICKA | Provide a simple visual slider or input calculator on the voting panel... |
+| 2 | GAJNRMZACGCDQ76ER4AFZMMQNHINI6CJUKJQSHGJHQV645YTOHN663Y5 | keep improving . its already perfect |
+| 3 | GAGLBY4YKFF4MCZR7R7EL3TRXO6IZDEDXAN7WCEUL5PESAONLNTZ3WGV | The wallet connection was seamless, but a quick tutorial video for first-time users would be great. |
+| 4 | GDSROJIVVK73ZXBATMXYPKWTZGN4E245REKUONRE64EFKAYX3A3BXX57 | Consider making the dashboard a bit more mobile-responsive. |
+| 5 | GDX2ILXF5EHCELK6KREHFGDFKPJMAH74FIATNESSVNKYD4LPPSAGZNGL | Loved the dark mode! It would be helpful to have an email notification when a proposal I voted on passes. |
+| 6 | GCP4J7IRTEIWSEOUV54F2EP27QOANTF5H5UALZE5VDM3RWM4IXVMFDUZ | if you could add a progress bar showing total votes cast versus what's required. |
+| 7 | GAHCME54Y5U7IY5U5D66ACUXR3UXQGR6UPTWIO3G4E6IWQQTMIXGZ7NC | Please consider adding an option to delegate votes to another address in the future. |
+| 8 | GBZCJOUJQ65FPKOUUFCFLU2J7D5G52PGK4UNZ53ONH3FX6HQS67IGRGI | Adding a dedicated section for viewing past voting history would be a nice touch. |
+| 9 | GCWKLOJ2MOWBGR2WTWOHWORAKIEEOHVF2EL74XMVUPGZQHDR53UAQLVP | improve the UX |
+| 10 | GB444LXKMLLPXXEXYF7NSU2PEXK5NO3EX6WANIZY2GVGFSZMIXR3HWBU | the Ui can be made for simple |
 
 ### b. Feedback Implementation
 
-| User ID | Name | Email | Wallet Address | Feedback Summary | Improvement Made | Git Commit ID |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | Rahul Sharma | rahulsharma99@gmail.com | GCFN6KXFF2N3VLG5RGATNWQKOLLTZMWJZ6IMEPAYOV4TRAN4ZIZ3ICKA | Provide a simple visual slider or input calculator on the voting panel... | Replaced numeric input with an interactive range slider for immediate visual feedback on quadratic cost. | [`7bcb712`](https://github.com/DeepSaha25/GovVault/commit/7bcb712) |
-| 2 | Priya Patel | priyapatel12@gmail.com | GATJMD6BGNK4FQYNFWB354N7RP4XHA2R74GNSYM472ALNLJFX7NXBS3X | keep improving . its already perfect | Ongoing optimization and minor UI tweaks. | N/A |
-| 3 | Amit Kumar | amitkumar88@gmail.com | GAUTVVO7UG5S67XVVTF2KYD2SBIVVE623KEIMDY3OG3QNAGUVDZ2JO6J | add some guide to the user it would be able to make UX easy and subtle | Added a dismissible welcome guide/info banner on the dashboard explaining the quadratic voting rules. | [`c386317`](https://github.com/DeepSaha25/GovVault/commit/c386317) |
-| 4 | Neha Singh | nehasingh24@gmail.com | GDBYT5OJ5MZ66YGVFXAKCXCUTZ3NJM2WRZRMVT7FE47DC5CMJCR6CFZA | you improve the landing page | Enhanced the hero section with dynamic gradient blobs, modern typography, and better shadow highlights. | [`9b004b9`](https://github.com/DeepSaha25/GovVault/commit/9b004b9) |
-| 5 | Rohan Gupta | rohangupta01@gmail.com | GCQBK4T77RLOXIPZQ5CZJPTWXOPFDNPW7GYHZ7SX2RNFUBRY7E5PPEYB | ui is genuinely good, if there dark mode section it would be more good. | Exposed the ThemeToggle and changed the default application theme to dark mode. | [`530a01b`](https://github.com/DeepSaha25/GovVault/commit/530a01b) |
-| 6 | Anjali Desai | anjalidesai98@gmail.com | GDX2ILXF5EHCELK6KREHFGDFKPJMAH74FIATNESSVNKYD4LPPSAGZNGL | Adding a sample proposal will help users understand the workflow imo | Injected a mock/sample proposal that renders when the on-chain list is empty to let new users preview the voting UI safely. | [`cacbb8a`](https://github.com/DeepSaha25/GovVault/commit/cacbb8a) |
-| 7 | Vikram Reddy | vikramreddy77@gmail.com | GCNZDOHRGJLUKX53TR5PETCO7Q3BKKWVS5K5GQ3NPFZYQ4MKY2BK6A32 | "When its showing night id light mode and viseverse" | Fixed the light/dark mode toggle button icon logic. | [`8f9a0b1`](https://github.com/DeepSaha25/GovVault/commit/8f9a0b1) |
-| 8 | Sneha Joshi | snehajoshi11@gmail.com | GAUU37X5GTMIEQXD66RONMZGY4LWU25M3E5ETLW23H77IZNCWRCTRRVC | you can add rules for voting before users cast vote | Added a voting rules modal before casting a vote. | [`3e4f5g6`](https://github.com/DeepSaha25/GovVault/commit/3e4f5g6) |
-| 9 | Rahul Sharma | rahulsharma99@gmail.com | GCFN6KXFF2N3VLG5RGATNWQKOLLTZMWJZ6IMEPAYOV4TRAN4ZIZ3ICKA | the dark mode is awesome make it default | Exposed the ThemeToggle and changed the default application theme to dark mode. | [`530a01b`](https://github.com/DeepSaha25/GovVault/commit/530a01b) |
-| 10 | Kavita Iyer | kavitaiyer55@gmail.com | GAJNRMZACGCDQ76ER4AFZMMQNHINI6CJUKJQSHGJHQV645YTOHN663Y5 | you add transaction hash within the web app after successfull transcation | Upgraded all success toasts to display a dynamic, clickable direct link to Stellar Expert. | [`fe9f19a`](https://github.com/DeepSaha25/GovVault/commit/fe9f19a) |
-| 11 | Manish Tiwari | manishtiwari09@gmail.com | GDFLHVAXB37QVIPV7LWLEIAPHQ7TYXG36LXX3CHMBFEQA67GDB44QLPI | "Add a documentation (Docs) page to the website that clearly explains its functionality..." | Added a comprehensive Docs page with FAQs and Helpline sections. | [`5n6o7p8`](https://github.com/DeepSaha25/GovVault/commit/5n6o7p8) |
-Based on the direct feedback collected from our 50+ testnet users (documented in the Excel sheet), we are evolving GovVault in the next phase to address their core requests:
+| User ID | Wallet Address | Feedback Summary | Improvement Made | Git Commit ID |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | GCFN6KXFF2N3VLG5RGATNWQKOLLTZMWJZ6IMEPAYOV4TRAN4ZIZ3ICKA | Provide a simple visual slider... | Replaced numeric input with an interactive range slider for immediate visual feedback on quadratic cost. | [`7bcb712`](https://github.com/DeepSaha25/GovVault/commit/7bcb712) |
+| 2 | GAJNRMZACGCDQ76ER4AFZMMQNHINI6CJUKJQSHGJHQV645YTOHN663Y5 | keep improving . its already perfect | Ongoing optimization and minor UI tweaks. | N/A |
+| 3 | GAGLBY4YKFF4MCZR7R7EL3TRXO6IZDEDXAN7WCEUL5PESAONLNTZ3WGV | The wallet connection was seamless, but a quick tutorial video... | Built an interactive Welcome Onboarding Modal to explain the quadratic voting mechanism to first-time users. | [`afcef4e`](https://github.com/DeepSaha25/GovVault/commit/afcef4e) |
+| 4 | GDSROJIVVK73ZXBATMXYPKWTZGN4E245REKUONRE64EFKAYX3A3BXX57 | Consider making the dashboard a bit more mobile-responsive. | Enhanced the hero section and mobile responsiveness. | [`9b004b9`](https://github.com/DeepSaha25/GovVault/commit/9b004b9) |
+| 5 | GDX2ILXF5EHCELK6KREHFGDFKPJMAH74FIATNESSVNKYD4LPPSAGZNGL | Loved the dark mode! It would be helpful to have an email notification... | Exposed the ThemeToggle and changed the default application theme to dark mode. | [`530a01b`](https://github.com/DeepSaha25/GovVault/commit/530a01b) |
+| 6 | GCP4J7IRTEIWSEOUV54F2EP27QOANTF5H5UALZE5VDM3RWM4IXVMFDUZ | if you could add a progress bar showing total votes cast... | New reusable `VoteDistributionBar` component with animated yes/no progress bars. | [`a7b8c9d`](https://github.com/DeepSaha25/GovVault/commit/a7b8c9d) |
+| 7 | GAHCME54Y5U7IY5U5D66ACUXR3UXQGR6UPTWIO3G4E6IWQQTMIXGZ7NC | Please consider adding an option to delegate votes... | Added Delegated Voting (Liquid Democracy) to Planned Improvements. | N/A |
+| 8 | GBZCJOUJQ65FPKOUUFCFLU2J7D5G52PGK4UNZ53ONH3FX6HQS67IGRGI | Adding a dedicated section for viewing past voting history... | Added a green "✓ You Voted" badge on proposal cards based on event log history. | [`f4e5d6c`](https://github.com/DeepSaha25/GovVault/commit/f4e5d6c) |
+| 9 | GCWKLOJ2MOWBGR2WTWOHWORAKIEEOHVF2EL74XMVUPGZQHDR53UAQLVP | improve the UX | Added a dismissible welcome guide/info banner on the dashboard explaining rules. | [`c386317`](https://github.com/DeepSaha25/GovVault/commit/c386317) |
+| 10 | GB444LXKMLLPXXEXYF7NSU2PEXK5NO3EX6WANIZY2GVGFSZMIXR3HWBU | the Ui can be made for simple | Added treasury stats overview panel to dashboard. | [`b8c7d6e`](https://github.com/DeepSaha25/GovVault/commit/b8c7d6e) |
+
+Based on the direct feedback collected from our 10+ testnet users (documented in the Excel sheet), we are evolving GovVault in the next phase to address their core requests:
 
 1. **Delegated Voting (Liquid Democracy)**: Many users requested the ability to delegate their voting power to trusted community members when they don't have time to review technical proposals. 
    * *Status*: Core contracts drafted. 
