@@ -82,7 +82,7 @@ export default function FaucetPage() {
             <div className="w-full max-w-md space-y-4">
               <div className="bg-slate-50 dark:bg-surface-800 p-3 rounded border border-slate-200 dark:border-surface-700 flex justify-between items-center text-sm">
                 <span className="text-slate-500 dark:text-slate-400">Connected Address</span>
-                <span className="font-mono text-black dark:text-white truncate w-32">{publicKey.substring(0, 6)}...{publicKey.substring(publicKey.length - 4)}</span>
+                <span className="font-mono text-black dark:text-white truncate w-32">{publicKey ? `${publicKey.substring(0, 6)}...${publicKey.substring(publicKey.length - 4)}` : ''}</span>
               </div>
               
               <Button 
