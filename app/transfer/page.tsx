@@ -110,7 +110,7 @@ export default function TransferPage() {
                   Sender Account
                 </label>
                 <div className="h-12 w-full rounded border border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-900 px-4 flex items-center justify-between text-xs text-slate-700 dark:text-slate-200 font-mono">
-                  <span>{stellar.formatAddress(publicKey, 6, 6)}</span>
+                  <span>{publicKey ? stellar.formatAddress(publicKey, 6, 6) : ''}</span>
                   <span className="text-slate-500 dark:text-slate-400 font-sans font-semibold">Balance: {balance} XLM</span>
                 </div>
               </div>
