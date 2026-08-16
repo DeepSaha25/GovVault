@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "governor-contract",
+    "treasury-contract"
+]
+resolver = "2"
