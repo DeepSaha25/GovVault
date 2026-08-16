@@ -36,7 +36,7 @@ fn setup_test_env(env: &Env) -> (Address, Address, Address, Address) {
     let treasury_client = treasury_contract::TreasuryContractClient::new(env, &treasury_id);
 
     // 4. Initialize contracts
-    governor_client.initialize(&treasury_id, &token_id);
+    governor_client.initialize(&treasury_id, &token_id, &1i128);
     treasury_client.initialize(&governor_id, &token_id);
 
     // Mint funds to the treasury contract directly

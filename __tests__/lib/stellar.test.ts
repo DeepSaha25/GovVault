@@ -16,7 +16,7 @@ describe('StellarHelper Utilities', () => {
 
     it('supports custom start and end lengths', () => {
       const address = 'GB7OTVADKAP2N7CLW5X7Q5ZAKN6635PEIX4UKSX5TPSPGFF3ND224EIN';
-      expect(stellar.formatAddress(address, 6, 6)).toBe('GB7OTV...24EIN');
+      expect(stellar.formatAddress(address, 6, 6)).toBe('GB7OTV...224EIN');
     });
 
     it('handles exact-length address equal to start+end without truncation', () => {
